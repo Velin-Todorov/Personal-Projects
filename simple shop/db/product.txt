@@ -1,0 +1,11 @@
+{"id":1, "name": "Laptop", "img": "laptop.jpg", "price": 2.00, "count": 5}
+{"id":2, "name": "Laptop", "img": "laptop.jpg", "price": 2.60, "count": 5}
+{"id":3, "name": "Laptop", "img": "laptop.jpg", "price": 4, "count": 5}
+{"id":4, "name": "Laptop", "img": "laptop.jpg", "price": 5, "count": 5}
+{"id":5, "name": "Phone", "img": "phone.jpg", "price": 10, "count": 15}
+{"id":6, "name": "Phone", "img": "phone.jpg", "price": 52, "count": 45}
+{"id":7, "name": "Phone", "img": "phone.jpg", "price": 55, "count": 23}
+{"id":9, "name": "Phone", "img": "phone.jpg", "price": 43, "count": 17}
+{"id":10, "name": "Headphones", "img": "headphones.jpg", "price": 13, "count": 12}
+{"id":11, "name": "Headphones", "img": "headphones.jpg", "price": 23, "count": 11}
+{"id":12, "name": "Headphones", "img": "headphones.jpg", "price": 53, "count": 7}
