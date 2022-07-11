@@ -115,7 +115,7 @@ minus_button = Button(root, text='-', padx=50, command= subtract, font='Helvetic
 divide_button = Button(root, text='/', padx=50, command= divide,font='Helvetica 16', width=5 ).grid(row=5, column=2)
 multiply_button = Button(root, text='*', padx=50, command= multiply,font='Helvetica 16', width=5).grid(row=5, column=3)
 clear_result_button = Button(root, text='Clear', padx=50, command=clear, font='Helvetica 16', width=5).grid(row=3, column=3)
-clear_number1_button = Button(root, text='Clear', padx=50, command=clear_number1, font='Helvetica 15', width=5).grid(row=0, column=3)
-clear_number2_button = Button(root, text='Clear', padx=50, command=clear_number2, font='Helvetica 15', width=5).grid(row=2, column=3)
+clear_number1_button = Button(root, text='Clear', padx=50, command=clear_number1, font='Helvetica 16', width=5).grid(row=0, column=3)
+clear_number2_button = Button(root, text='Clear', padx=50, command=clear_number2, font='Helvetica 16', width=5).grid(row=2, column=3)
 
 root.mainloop()
