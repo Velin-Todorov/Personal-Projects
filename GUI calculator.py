@@ -1,3 +1,4 @@
+import tkinter.messagebox
 from tkinter import *
 
 
@@ -21,12 +22,10 @@ class Calculator:
 
 
 # validation of input
-def input_to_int():
-    number1 = E1.get()
-    number2 = E2.get()
+def validating_input(n1, n2):
 
-    if not number1.isdigit() or not number2.isdigit():
-        raise ValueError('The input is incorrect. You have not provided an integer!')
+    if not n1.isdigit() or not n2.isdigit():
+        tkinter.messagebox.showerror('Python Error', 'The input is incorrect. You have not provided an integer!')
 
 
 # addition
@@ -34,8 +33,9 @@ def add():
     number1 = E1.get()
     number2 = E2.get()
 
-    calculator = Calculator(float(number1), float(number2))
+    validating_input(number1, number2)
 
+    calculator = Calculator(float(number1), float(number2))
     return displaying_result.insert(0, calculator.add(float(number1), float(number2)))
 
 
@@ -43,6 +43,8 @@ def add():
 def subtract():
     number1 = E1.get()
     number2 = E2.get()
+
+    validating_input(number1, number2)
 
     calculator = Calculator(float(number1), float(number2))
     return displaying_result.insert(0, calculator.subtract(float(number1), float(number2)))
@@ -53,18 +55,21 @@ def multiply():
     number1 = E1.get()
     number2 = E2.get()
 
-    calculator = Calculator(float(number1), float(number2))
+    validating_input(number1, number2)
 
+    calculator = Calculator(float(number1), float(number2))
     return displaying_result.insert(0, calculator.multiply(float(number1), float(number2)))
 
 
 # division
 def divide():
-    number1 = float(E1.get())
-    number2 = float(E2.get())
+    number1 = E1.get()
+    number2 = E2.get()
 
-    if number1 == 0 or number2 == 0:
-        displaying_result.insert(0, "You cannot divide by 0. Math Error!")
+    validating_input(number1, number2)
+
+    if int(number1) == 0 or int(number2) == 0:
+        tkinter.messagebox.showerror('Python Error','You cannot divide by 0. Math Error!')
 
     calculator = Calculator(number1, number2)
     return displaying_result.insert(0, calculator.divide(number1, number2))
