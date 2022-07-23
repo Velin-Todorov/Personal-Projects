@@ -1,0 +1,8 @@
+This is my first serious project. 
+I followed this tutorial on how to build a Tic Tac Toe game with AI. Please refer to this link: https://www.youtube.com/watch?v=Bk9hlNZc6sE
+
+The purpose of following this tutorial is for me to learn how to use pygame and how to code an AI using the MiniMax algorithm.
+
+More will follow on this project:
+  1. I am planning to add a Main Menu screen which contains general information about this project.
+  2. A pop-up/message, which displays who the winner is and what to do if the player wants to play again.
