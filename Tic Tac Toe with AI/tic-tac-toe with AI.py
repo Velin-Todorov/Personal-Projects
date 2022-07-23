@@ -5,6 +5,7 @@ import sys
 # ROWS, COLS for the console board class
 ROWS = 3
 COLS = 3
+SIZE_FIELD = ROWS * COLS
 
 # size of the screen
 WIDTH = 650
@@ -49,6 +50,35 @@ class Board:
     def mark_position(self, row, col, player):
         self.squares[row][col] = player
         self.marked_squares += 1  # this attribute is to see when the board is full
+
+    def final_state(self):
+        """
+        returns 0 if no win YET
+        returns 1 if player 1 wins
+        returns 2 if player 2 wins
+        """
+        for col in range(COLS):
+
+            # checking for vertical win
+            if self.squares[0][col] == self.squares[1][col] == self.squares[2][col] != 0:
+                return self.squares[0][col]
+
+        for row in range(ROWS):
+
+            # checking for horizontal win
+            if self.squares[row][0] == self.squares[row][1] == self.squares[row][2] != 0:
+                return self.squares[row][0]
+
+        # primary diagonal win
+        if self.squares[0][0] == self.squares[1][1] == self.squares[2][2] != 0:
+            return self.squares[0][0]
+
+        # secondary diagonal win
+        if self.squares[0][ROWS - 0 - 1] == self.squares[1][ROWS - 1 - 1] == self.squares[2][ROWS - 2 - 1] != 0:
+            return self.squares[0][ROWS - 0 - 1]
+
+        # NO WIN YET
+        return 0
 
     def is_empty(self, row, col):
         """The purpose of this function is to check if a position on the board is empty"""
