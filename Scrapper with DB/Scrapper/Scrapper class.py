@@ -1,48 +1,71 @@
 import requests
-from bs4 import BeautifulSoup as bs
-import re
-import openpyxl
+from bs4 import BeautifulSoup
+from openpyxl import Workbook
 
-URL = r'https://www.ebay.com/b/Sony/bn_21835731'
+# Building Excel Workbook
+wb = Workbook()
+worksheet = wb.active
+worksheet.title = 'Product Info'
+worksheet['A1'] = 'Product name'
+worksheet['B1'] = 'Brand'
+worksheet['C1'] = 'Price'
+worksheet['D1'] = 'Availability'
 
-regex = r'(?<=>)(.*?)(?=<)'
+# Building the Scrapper
+HEADERS = {'User-Agent':
+               'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0)'
+               ' Gecko/20100101 Firefox/102.0',
+           'Accept-Language': 'en-US'}
 
-HEADERS = ({'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0)'
-            ' Gecko/20100101 Firefox/102.0',
-            'Accept-Language': 'en-US'})
+product_links = []
+
+for i in range(1, 4):
+    ULR = f'https://www.ozone.bg/razopakovani/?limit=100&p={i}'
+    webpage = requests.get(ULR, headers=HEADERS)
+    soup = BeautifulSoup(webpage.content, 'lxml')
+    products = soup.find_all('div', class_='col-xs-3 five-on-a-row')
+
+    for item in products:
+        for link in item.find_all('a', href=True):
+            product_links.append(link['href'])
+
+count = 1
+
+for product_link in product_links:
+    count += 1
+    webpage = requests.get(product_link, headers=HEADERS)
+    soup = BeautifulSoup(webpage.content, 'lxml')
+
+    try:
+        name = soup.find('h1', attrs={'itemprop': 'name'}).text.strip()
+    except:
+        name = 'Not Available'
+
+    try:
+        attribute_list_to_obtain_brand = soup.find('ul', class_='attribute-list').text.strip().split()
+    except:
+        attribute_list_to_obtain_brand = []
+
+    brand = attribute_list_to_obtain_brand[-1]
+
+    try:
+        price = soup.find('p', attrs={'class':'special-price'}).text.strip().split('\n')[2].strip()
+    except:
+        price = 'Not Available'
+
+    try:
+        availability = soup.find('p', attrs={'id': 'availability-holder'}).text.strip().split('\t')[-1]
+    except:
+        availability = 'Not Available'
+
+    worksheet[f'A{count}'] = name
+    worksheet[f'B{count}'] = brand
+    worksheet[f'C{count}'] = price
+    worksheet[f'D{count}'] = availability
+
+    print(price)
+    print(f'Saving {name}...')
 
 
-class Requests:
-
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def send_request(url):
-        webpage = requests.get(url, headers=HEADERS)
-        return webpage
-
-    def get_bs_object(self, url):
-        webpage = self.send_request(url)
-        soup = bs(webpage.content, features='lxml')
-        return soup
-
-    def get_results_from_find_title(self, url):
-        soup = self.get_bs_object(url)
-        result = soup.findAll('h3', attrs={'class': "s-item__title"})
-        return result
-
-
-r = Requests()
-array_which_contains_data_from_scrape = []
-
-data = r.get_results_from_find_title(URL)
-for string in data:
-    match = re.findall(regex, str(string))
-
-    if match:
-        array_which_contains_data_from_scrape.append(match)
-
-print(array_which_contains_data_from_scrape)
-
+wb.save(r'C:\Users\velin\OneDrive\Desktop\Scrapper Project\Ozone Product Info.xlsx')
+print('Workbook saved. Scraping Completed!')
