@@ -1,6 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
+import mysql.connector
+import mysql
+
+
+# DB - MySQL
+
+db = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='',
+    database='ozone_product_data'
+)
+mycursor = db.cursor()
 
 # Building Excel Workbook
 wb = Workbook()
@@ -35,6 +48,7 @@ for product_link in product_links:
     count += 1
     webpage = requests.get(product_link, headers=HEADERS)
     soup = BeautifulSoup(webpage.content, 'lxml')
+    brand = ''
 
     try:
         name = soup.find('h1', attrs={'itemprop': 'name'}).text.strip()
@@ -46,10 +60,11 @@ for product_link in product_links:
     except:
         attribute_list_to_obtain_brand = []
 
-    brand = attribute_list_to_obtain_brand[-1]
+    if attribute_list_to_obtain_brand:
+        brand = attribute_list_to_obtain_brand[-1]
 
     try:
-        price = soup.find('p', attrs={'class':'special-price'}).text.strip().split('\n')[2].strip()
+        price = soup.find('p', attrs={'class': 'special-price'}).text.strip().split('\n')[2].strip()
     except:
         price = 'Not Available'
 
@@ -58,14 +73,14 @@ for product_link in product_links:
     except:
         availability = 'Not Available'
 
-    worksheet[f'A{count}'] = name
-    worksheet[f'B{count}'] = brand
-    worksheet[f'C{count}'] = price
-    worksheet[f'D{count}'] = availability
-
-    print(price)
-    print(f'Saving {name}...')
+    # worksheet[f'A{count}'] = name
+    # worksheet[f'B{count}'] = brand
+    # worksheet[f'C{count}'] = price
+    # worksheet[f'D{count}'] = availability
 
 
-wb.save(r'C:\Users\velin\OneDrive\Desktop\Scrapper Project\Ozone Product Info.xlsx')
-print('Workbook saved. Scraping Completed!')
+    mycursor.execute("INSERT INTO product_data VALUES(%s,%s,%s,%s)", (name, brand, availability, price))
+    db.commit()
+
+# wb.save(r'C:\Users\velin\OneDrive\Desktop\Scrapper Project\Ozone Product Info.xlsx')
+# print('Workbook saved. Scraping Completed!')
