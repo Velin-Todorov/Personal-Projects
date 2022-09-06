@@ -42,7 +42,7 @@ for i in range(1, 4):
         for link in item.find_all('a', href=True):
             product_links.append(link['href'])
 
-count = 1
+count = 0
 
 for product_link in product_links:
     count += 1
@@ -79,8 +79,9 @@ for product_link in product_links:
     # worksheet[f'D{count}'] = availability
 
 
-    mycursor.execute("INSERT INTO product_data VALUES(%s,%s,%s,%s)", (name, brand, availability, price))
+    mycursor.execute("INSERT INTO product_data VALUES(%s, %s,%s,%s,%s)", (count, name, brand, availability, price))
     db.commit()
+    print(f'Product {count} data saved into database.')
 
 # wb.save(r'C:\Users\velin\OneDrive\Desktop\Scrapper Project\Ozone Product Info.xlsx')
 # print('Workbook saved. Scraping Completed!')
