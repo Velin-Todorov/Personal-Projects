@@ -50,38 +50,33 @@ for product_link in product_links:
     soup = BeautifulSoup(webpage.content, 'lxml')
     brand = ''
 
-    try:
-        name = soup.find('h1', attrs={'itemprop': 'name'}).text.strip()
-    except:
+    name = soup.find('h1', attrs={'itemprop': 'name'}).text.strip()
+    if not name:
         name = 'Not Available'
 
-    try:
-        attribute_list_to_obtain_brand = soup.find('ul', class_='attribute-list').text.strip().split()
-    except:
-        attribute_list_to_obtain_brand = []
+    attribute_list_to_obtain_brand = soup.find('ul', class_='attribute-list').text.strip().split()
 
     if attribute_list_to_obtain_brand:
         brand = attribute_list_to_obtain_brand[-1]
+    else:
+        brand = 'Not Available'
 
-    try:
-        price = soup.find('p', attrs={'class': 'special-price'}).text.strip().split('\n')[2].strip()
-    except:
+    price = soup.find('p', attrs={'class': 'special-price'}).text.strip().split('\n')[2].strip()
+    if not price:
         price = 'Not Available'
 
-    try:
-        availability = soup.find('p', attrs={'id': 'availability-holder'}).text.strip().split('\t')[-1]
-    except:
+    availability = soup.find('p', attrs={'id': 'availability-holder'}).text.strip().split('\t')[-1]
+    if not availability:
         availability = 'Not Available'
+
+    mycursor.execute("INSERT INTO product_data VALUES(%s, %s,%s,%s,%s)", (count, name, brand, availability, price))
+    db.commit()
+    print(f'Product {count} data saved into database.')
 
     # worksheet[f'A{count}'] = name
     # worksheet[f'B{count}'] = brand
     # worksheet[f'C{count}'] = price
     # worksheet[f'D{count}'] = availability
-
-
-    mycursor.execute("INSERT INTO product_data VALUES(%s, %s,%s,%s,%s)", (count, name, brand, availability, price))
-    db.commit()
-    print(f'Product {count} data saved into database.')
 
 # wb.save(r'C:\Users\velin\OneDrive\Desktop\Scrapper Project\Ozone Product Info.xlsx')
 # print('Workbook saved. Scraping Completed!')
