@@ -32,7 +32,7 @@ class LoginForm(QDialog):
 
         # Create new Account Link
         self.Make_New_Account = QLabel()
-        self.Make_New_Account.setText("<a style= text-decoration:none; href='http://example.com'> Don't Have An Account? Click Here to Make One!</a>")
+        self.Make_New_Account.setText("<a style= text-decoration:none; href='http://127.0.0.1:5500/Password%20Manager/Sign-up%20page.html'> Don't Have An Account? Click Here to Make One!</a>")
         self.Make_New_Account.setOpenExternalLinks(True)
 
         # Modifying the Password field
