@@ -5,10 +5,6 @@ Functionality as of now (06-SEP-2022):
 2. Added a mysql database, hosted locally. This DB is fed the scrapped data.
 3. Optional functionality exists to save the scrapped data into an excel file - only need to uncomment the commented parts of the code.
 
-Future functionality to be added (More will follow on this):
-1. A GUI that provides a user with the opportunity to add more rows to the db, and scrape more websites
-2. Option to generate a dashboard from the price data in the SQL table.
-
 Technologies used:
 1. MySQL
 2. BeautifulSoup
