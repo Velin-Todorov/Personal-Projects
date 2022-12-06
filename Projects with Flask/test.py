@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask_bootstrap import Bootstrap
-from login_form import NameForm
+from login_form import LoginForm
+from register_form import Register_Form
 
 
 app = Flask(__name__)
@@ -17,15 +18,15 @@ def landing_page():
 @app.route('/register')
 def register():
     """This view handles registration"""
+    form = Register_Form()
     return render_template('register.html')
 
 @app.route('/login')
 def login():
     """This view handles login form"""
-    form = NameForm()
+    form = LoginForm()
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
+        name = form.email.data
     return render_template('login.html', form=form)
 
 
