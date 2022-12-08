@@ -29,7 +29,7 @@ input[type="text"] {
     width: 150px;
     display: block;
     margin-bottom: 10px;
-    background-color: yellow;
+    background-color: white;
     margin: auto;
 }
 
@@ -37,7 +37,7 @@ input[type="password"] {
     width: 150px;
     display: block;
     margin-bottom: 10px;
-    background-color: yellow;
+    background-color: white;
     margin: auto;
 }
 

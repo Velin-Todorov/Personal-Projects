@@ -47,9 +47,18 @@ def register():
 def login():
     """This view handles login form"""
     form = LoginForm()
+    email = None
+    password = None
     if form.validate_on_submit():
-        name = form.email.data
-    return render_template('login.html', form=form)
+        email = form.email.data
+        password = form.password.data
+
+    return render_template(
+        'login.html', 
+        form=form,
+        email = email,
+        password=password
+        )
 
 
 @app.route('/all-items')
