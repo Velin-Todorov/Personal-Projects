@@ -1,6 +1,6 @@
 ul {
     list-style-type: none;
-    margin: 0;
+    margin: auto;
     padding: 0;
     overflow: hidden;
     background-color: #666;
@@ -10,10 +10,6 @@ ul {
     text-align: center;
     height: 47px;
     width: 250px;
-}
-
-.container {
-    text-align: center;
 }
 
 .title {

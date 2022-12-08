@@ -18,8 +18,30 @@ def landing_page():
 @app.route('/register')
 def register():
     """This view handles registration"""
+    email = None
+    password = None
+    re_pass = None
+    phone_number = None
+    country = None
     form = Register_Form()
-    return render_template('register.html')
+
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        re_pass = form.repeat_pass.data
+        phone_number = form.phone_number.data
+        country = form.country.data
+
+    return render_template(
+        'register.html', 
+        form=form, 
+        email=email, 
+        password=password,
+        re_pass=re_pass,
+        phone_number=phone_number,
+        country=country
+
+    )   
 
 @app.route('/login')
 def login():

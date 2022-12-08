@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+
+@import url("https://fonts.googleapis.com/css2?family=Asap&family=Roboto:ital,wght@0,500;0,900;1,500&display=swap");
+
+body {
+    background: #fff;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.col-md-5 {
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    font-size: 60px;
+    font-weight: 600;
+    color: crimson;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+
+input[type="text"] {
+    width: 150px;
+    display: block;
+    margin-bottom: 10px;
+    background-color: yellow;
+    margin: auto;
+}
+
+input[type="password"] {
+    width: 150px;
+    display: block;
+    margin-bottom: 10px;
+    background-color: yellow;
+    margin: auto;
+}
+
+h2 {
+    padding-top: 1.5rem;
+}
+
+a {
+    color: #333;
+}
+
+a:hover {
+    color: #da5767;
+    text-decoration: none;
+}
+
+.card {
+    border: 0.40rem solid #f8f9fa;
+    top: 10%;
+}
+
+.form-control {
+    background-color: #f8f9fa;
+    padding: 20px;
+    padding: 25px 15px;
+    margin-bottom: 1.3rem;
+}
+
+.form-control:focus {
+
+    color: #000000;
+    background-color: #ffffff;
+    border: 3px solid #da5767;
+    outline: 0;
+    box-shadow: none;
+
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    background: #da5767;
+    border: 2px solid #da5767;
+}
+
+.btn-primary:hover {
+
+
+    background-color: #df8c96;
+    border-color: #df8c96;
+    transition: .3s;
+
+}
