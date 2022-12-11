@@ -14,10 +14,6 @@ csrf.init_app(app)
 bootstrap = Bootstrap(app)
 
 app.config['SECRET_KEY'] = environmental_vars.secret_key()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345@localhost/flasksql'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
 
 
 @app.route('/')
@@ -29,6 +25,7 @@ def landing_page():
 def register():
     """This view handles registration"""
     email = None
+    username = None
     password = None
     re_pass = None
     phone_number = None
@@ -37,6 +34,7 @@ def register():
 
     if form.validate_on_submit():
         email = form.email.data
+        username = form.username.data
         password = form.password.data
         re_pass = form.repeat_pass.data
         phone_number = form.phone_number.data
@@ -46,6 +44,7 @@ def register():
         'register.html', 
         form=form, 
         email=email, 
+        username = username,
         password=password,
         re_pass=re_pass,
         phone_number=phone_number,
@@ -57,16 +56,16 @@ def register():
 def login():
     """This view handles login form"""
     form = LoginForm()
-    email = None
+    username = None
     password = None
     if form.validate_on_submit():
-        email = form.email.data
+        email = form.username.data
         password = form.password.data
 
     return render_template(
         'login.html', 
         form=form,
-        email = email,
+        email = username,
         password=password
         )
 
