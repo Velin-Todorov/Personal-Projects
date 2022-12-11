@@ -3,11 +3,21 @@ from flask import render_template
 from flask_bootstrap import Bootstrap
 from login_form import LoginForm
 from register_form import Register_Form
+from flask_wtf import CSRFProtect
+from utils import environmental_vars
+from flask_sqlalchemy import SQLAlchemy
+import configs
 
-
+csrf = CSRFProtect()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hello'
+csrf.init_app(app)
 bootstrap = Bootstrap(app)
+
+app.config['SECRET_KEY'] = environmental_vars.secret_key()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345@localhost/flasksql'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 
 @app.route('/')
