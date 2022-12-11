@@ -22,6 +22,8 @@ body {
     color: crimson;
     -webkit-background-clip: text;
     background-clip: text;
+    margin: auto;
+    text-align: center;
 }
 
 

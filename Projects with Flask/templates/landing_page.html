@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,18 +14,24 @@
 </head>
 
 <body>
+    {% block header %}
+    <header>
+        <h1>
+            Password Manager
+        </h1>
+    </header>
+    {% endblock %}
+
     {% block navbar %}
-    <div class="title">
-        <p>Password Manager</p>
-    </div>
     <div class="container">
-        <ul> 
+        <ul>
             <li class="homeBtn"><a href="/">Home</a></li>
             <li class="regBtn"><a href="/register">Register</a></li>
             <li class="loginBtn"><a href="/login">Login</a></li>
         </ul>
     </div>
     {% endblock %}
+
     {% block content %}
     {% endblock %}
 </body>

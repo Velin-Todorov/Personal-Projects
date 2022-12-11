@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    {% block header %}
+    {{super()}}
+    {% endblock %}
     {% block navbar %}
     {{super()}}
     {% endblock %}
