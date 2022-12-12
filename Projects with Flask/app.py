@@ -1,43 +1,49 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, request, flash
 from flask_bootstrap import Bootstrap
 from login_form import LoginForm
 from register_form import Register_Form
 from flask_wtf import CSRFProtect
-from utils import environmental_vars
-from database import db, User
+from utils import environmental_vars, auth
+from flask_sqlalchemy import SQLAlchemy
+from database import User
 
 csrf = CSRFProtect()
 app = Flask(__name__)
 csrf.init_app(app)
 bootstrap = Bootstrap(app)
+db = SQLAlchemy(app)
 
 app.config['SECRET_KEY'] = environmental_vars.secret_key()
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345@localhost/flasksql'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 @app.route('/')
 def landing_page():
     """This view is concerned with the initial screen"""
     return render_template('landing_page.html')
 
-@app.route('/register')
+@app.route('/register', methods=['POST'])
 def register():
     """This view handles registration"""
-    email = None
-    username = None
-    password = None
-    re_pass = None
-    phone_number = None
-    country = None
     form = Register_Form()
 
-    if form.validate_on_submit():
-        email = form.email.data
-        username = form.username.data
-        password = form.password.data
-        re_pass = form.repeat_pass.data
-        phone_number = form.phone_number.data
-        country = form.country.data
+    email = request.form.get('email')
+    username = request.form.get('username')
+    password = request.form.get('email')
+    re_pass = request.form.get('email')
+
+    email = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(username=username)
+
+    if email or user:
+        flash('Username or email already in user')
+        return render_template('register.html', form=form)
+
+    else:
+        new_user = User(email=email, username=username, password= auth.hash_password(password))
+        db.session.add(new_user)
+        db.session.commit()
+        app.redirect('/')
 
     return render_template(
         'register.html', 
@@ -46,12 +52,9 @@ def register():
         username = username,
         password=password,
         re_pass=re_pass,
-        phone_number=phone_number,
-        country=country
-
     )   
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
     """This view handles login form"""
     form = LoginForm()
