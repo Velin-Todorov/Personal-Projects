@@ -1,7 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
-from flask_sqlalchemy import SQLAlchemy, model
-
-db = SQLAlchemy()
+from . import db
 
 class User(db.Model):
     # type: ignore 
@@ -11,6 +8,7 @@ class User(db.Model):
     email= db.Column(db.String, unique=True)
     username = db.Column(db.String, unique=True)
     password = db.Column(db.Text)
+    passwords = db.Column(db.JSON)
 
     def __init__(self, id, email, username, password) -> None:
         self.id = id

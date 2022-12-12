@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, current_app
 from Password_Manager import login_form, register_form, models
 from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
-from Password_Manager import create_app
+from . import create_app
 
 app = create_app()
 
@@ -17,24 +17,8 @@ def register():
     """This view handles registration"""
     form = register_form.Register_Form()
 
-    email = req.request.form.get('email')
-    username = req.request.form.get('username')
-    password = req.request.form.get('password')
-    re_pass = req.request.form.get('re_pass')
-
-    email = models.User.query.filter_by(email=email).first()
-    user = models.User.query.filter_by(username=username)
-
-    if email or user:
-        flash('Username or email already in user')
-        return render_template('register.html', form=form)
-
-    else:
-        new_user = User(email=email, username=username,
-                        password=auth.hash_password(password))
-
-        db.session.add(user)
-        db.session.commit()
+    if request.method == 'POST':
+    	pass       
 
     return render_template(
         'register.html',
