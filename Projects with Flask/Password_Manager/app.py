@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from . import create_app
 from .models import User
 from . import db
+
 # from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
 from werkzeug.security import generate_password_hash
 
@@ -34,14 +35,7 @@ def register():
 
             user = User(email=email, username=username, password = generate_password_hash(password))
             
-            # if check_if_email_in_db(db, user):
-            #     flash('email already in use')
-
-            # if check_if_username_in_db(db, user):
-            #     flash('username already in use')
-
-            # if not check_if_passwords_match(password_form, repeat_pass_form):
-            #     flash('Passwords must match')
+           #TODO: Validations of registration
 
             db.session.add(user)
             db.session.commit()
@@ -62,6 +56,8 @@ def login():
     if form.validate_on_submit():
         email = form.username.data
         password = form.password.data
+
+    #TODO: Implement login
 
     return render_template(
         'login.html',
@@ -94,7 +90,11 @@ def other():
     """This view is concerned with all other passwords that are not labeled"""
     return '<h1>Other</h1>'
 
-
+@app.route('/logout')
+def logout():
+    """This view deals with logout"""
+    return '<h1>Logout</h1>'
+    
 # @app.errorhandler(404)
 # def page_not_found(e):
 #     return render_template('404.html'), 404
