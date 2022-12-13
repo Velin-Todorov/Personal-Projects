@@ -22,11 +22,7 @@ def register():
 
     return render_template(
         'register.html',
-        form=form,
-        email=email,
-        username=username,
-        password=password,
-        re_pass=re_pass,
+        form=form
     )
 
 
