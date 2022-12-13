@@ -6,12 +6,6 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email= db.Column(db.String, unique=True)
-    username = db.Column(db.String, unique=True)
+    username = db.Column(db.String, index=True)
     password = db.Column(db.Text)
-    passwords = db.Column(db.JSON)
 
-    def __init__(self, id, email, username, password) -> None:
-        self.id = id
-        self.email = email
-        self.username = username
-        self.password = password

@@ -25,8 +25,9 @@
                 <div class="card">
                     <h2 class="card-title text-center">Register</h2>
                     <div class="card-body py-md-4">
-                        <form _lpchecked="1" method="post">
+                        <form method="POST">
                             {{form.hidden_tag()}}
+                            {{form.csrf_token}}
 
                             <div class="form-group">
                                 {{form.username.label}} {{form.username()}}
@@ -43,8 +44,9 @@
                             <div class="form-group">
                                 {{form.repeat_pass.label}} {{form.repeat_pass()}}
                             </div>
-                            {{form.submit()}}
-
+                            <br>
+                                {{form.submit()}}
+                            </br>
                             <div class="d-flex flex-row align-items-center justify-content-between">
                                 <a href="/login">Already have an account?</a>
                             </div>

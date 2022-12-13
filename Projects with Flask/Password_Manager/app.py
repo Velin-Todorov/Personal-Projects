@@ -1,10 +1,16 @@
-from flask import Flask, render_template, request, flash, current_app
+from flask import Flask, render_template, request, flash, current_app, redirect
 from Password_Manager import login_form, register_form, models
 from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from . import create_app
+from .models import User
+from . import db
+# from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
+from werkzeug.security import generate_password_hash
+
 
 app = create_app()
+
 
 @app.route('/')
 def landing_page():
@@ -18,7 +24,28 @@ def register():
     form = register_form.Register_Form()
 
     if request.method == 'POST':
-    	pass       
+        print(1)
+        if form.validate_on_submit():
+            print(1)
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['password']
+            repeat_pass_form = request.form['repeat_pass']
+
+            user = User(email=email, username=username, password = generate_password_hash(password))
+            
+            # if check_if_email_in_db(db, user):
+            #     flash('email already in use')
+
+            # if check_if_username_in_db(db, user):
+            #     flash('username already in use')
+
+            # if not check_if_passwords_match(password_form, repeat_pass_form):
+            #     flash('Passwords must match')
+
+            db.session.add(user)
+            db.session.commit()
+            return '<h1>Registration successful</h1>'
 
     return render_template(
         'register.html',
