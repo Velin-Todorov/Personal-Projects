@@ -72,7 +72,7 @@ def login():
 
         if user is not None:
             if check_password_hash(user.password, password):
-                return '<h1>Login Success</h1>'
+                return render_template('all_items.html')
             else:
                 flash('Invalid password or username!')
         else:

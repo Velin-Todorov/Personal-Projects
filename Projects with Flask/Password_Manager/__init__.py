@@ -1,4 +1,6 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
+from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy_utils as su
 import secrets
@@ -11,7 +13,9 @@ def secret_key():
 
 def create_app():
     app = Flask(__name__)
-
+    Bootstrap(app)
+    csrf = CSRFProtect(app)
+    
     app.config['SECRET_KEY'] = secret_key()
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://velin:123456@localhost/project'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

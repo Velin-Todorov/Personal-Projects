@@ -26,7 +26,8 @@
                     <h2 class="card-title-text-center">Login</h2>
                     <div class="card-body py-md-4">
                         <form _lpchecked="1" method="post">
-                            {{form.hidden_tag()}}
+                            {{ form.hidden_tag() }}
+                            {{ form.csrf_token }}
                             <div class="form-group">
                                 {{form.username.label}} {{form.username()}}
                             </div>
