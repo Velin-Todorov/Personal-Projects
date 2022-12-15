@@ -41,12 +41,8 @@ def register():
             exists_username = User.query.filter_by(username=username).first()           
             exists_email = User.query.filter_by(email=email).first()
 
-            print(exists_username)
-            print(exists_email)
-
-
             if exists_username is not None or exists_email is not None:
-                flash('User already exists now')
+                flash('User already exists')
                 return render_template('register.html', form=form)
 
             else:
