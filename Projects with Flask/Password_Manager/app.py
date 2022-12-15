@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, current_app, redirect
+from flask import Flask, render_template, request, flash, current_app, redirect, url_for
 from Password_Manager import login_form, register_form, models
 from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
@@ -25,21 +25,34 @@ def register():
     form = register_form.Register_Form()
 
     if request.method == 'POST':
-        print(1)
         if form.validate_on_submit():
-            print(1)
+        
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
-            repeat_pass_form = request.form['repeat_pass']
+            repeat_pass = request.form['repeat_pass']
 
-            user = User(email=email, username=username, password = generate_password_hash(password))
-            
-           #TODO: Validations of registration
+            hashed_pass = generate_password_hash(password)
+            hashed_re_pass = generate_password_hash(repeat_pass)
 
-            db.session.add(user)
-            db.session.commit()
-            return '<h1>Registration successful</h1>'
+            user = User(email=email, username=username,
+                        password=generate_password_hash(password))
+
+            exists_username = User.query.filter_by(username=username).first()           
+            exists_email = User.query.filter_by(email=email).first()
+
+            print(exists_username)
+            print(exists_email)
+
+
+            if exists_username is not None or exists_email is not None:
+                flash('User already exists now')
+                return render_template('register.html', form=form)
+
+            else:
+                db.session.add(user)
+                db.session.commit()
+                return redirect(url_for('landing_page')) 
 
     return render_template(
         'register.html',
@@ -57,7 +70,7 @@ def login():
         email = form.username.data
         password = form.password.data
 
-    #TODO: Implement login
+    # TODO: Implement login
 
     return render_template(
         'login.html',
@@ -90,11 +103,12 @@ def other():
     """This view is concerned with all other passwords that are not labeled"""
     return '<h1>Other</h1>'
 
+
 @app.route('/logout')
 def logout():
     """This view deals with logout"""
     return '<h1>Logout</h1>'
-    
+
 # @app.errorhandler(404)
 # def page_not_found(e):
 #     return render_template('404.html'), 404
