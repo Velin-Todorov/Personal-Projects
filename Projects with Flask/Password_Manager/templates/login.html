@@ -39,6 +39,13 @@
                                 <a href="/register">Don't have an account?</a>
                             </div>
                         </form>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{message}}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </div>
                 </div>
             </div>

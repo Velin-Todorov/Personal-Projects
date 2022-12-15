@@ -7,7 +7,7 @@ from .models import User
 from . import db
 
 # from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = create_app()
@@ -26,7 +26,7 @@ def register():
 
     if request.method == 'POST':
         if form.validate_on_submit():
-        
+
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
@@ -35,11 +35,14 @@ def register():
             hashed_pass = generate_password_hash(password)
             hashed_re_pass = generate_password_hash(repeat_pass)
 
-            user = User(email=email, username=username,
-                        password=generate_password_hash(password))
+            user = User(email=email, username=username, password=hashed_pass)
 
-            exists_username = User.query.filter_by(username=username).first()           
+            exists_username = User.query.filter_by(username=username).first()
             exists_email = User.query.filter_by(email=email).first()
+
+            if len(username) < 3:
+                flash('Username too short!')
+                return render_template('register.html', form=form)
 
             if exists_username is not None or exists_email is not None:
                 flash('User already exists')
@@ -48,7 +51,7 @@ def register():
             else:
                 db.session.add(user)
                 db.session.commit()
-                return redirect(url_for('landing_page')) 
+                return redirect(url_for('landing_page'))
 
     return render_template(
         'register.html',
@@ -60,19 +63,27 @@ def register():
 def login():
     """This view handles login form"""
     form = login_form.LoginForm()
-    username = None
-    password = None
-    if form.validate_on_submit():
-        email = form.username.data
-        password = form.password.data
 
-    # TODO: Implement login
+    if form.validate_on_submit():
+        username = request.form['username']
+        password = request.form['password']
+        
+        user = User.query.filter_by(username=username).first()
+
+        if user is not None:
+            if check_password_hash(user.password, password):
+                return '<h1>Login Success</h1>'
+            else:
+                flash('Invalid password or username!')
+        else:
+            return render_template(
+                'login.html',
+                form=form
+            )
 
     return render_template(
         'login.html',
-        form=form,
-        email=username,
-        password=password
+        form=form
     )
 
 
