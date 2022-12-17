@@ -1,5 +1,6 @@
 from . import db
 from . import login_manager
+from flask_login import UserMixin
 
 
 class Password(db.Model):
@@ -11,7 +12,7 @@ class Password(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     # type: ignore 
     """Table for users"""
     __tablename__ = 'users'

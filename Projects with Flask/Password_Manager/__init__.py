@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy_utils as su
-from flask_login import LoginManager
+from flask_login import LoginManager, AnonymousUserMixin
 import secrets
 
 db = SQLAlchemy()
@@ -13,6 +13,9 @@ login_manager.login_view = 'login'
 def secret_key():
     return secrets.token_hex()
 
+class Anonymous(AnonymousUserMixin):
+    def __init__(self):
+        self.username= 'Guest'
 
 def create_app():
     app = Flask(__name__)
@@ -26,6 +29,7 @@ def create_app():
     db.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
+    login_manager.anonymous_user = Anonymous
 
     with app.app_context():
         from . import models

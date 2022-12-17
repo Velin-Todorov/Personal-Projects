@@ -3,10 +3,23 @@
 {% block head %}
     {{ super() }}
 {% endblock %}
+<body>
 
-{% block navbar %}
-    {{super()}}
-{% endblock %}
+    {% block header %}
+    <header>
+        <h1>
+            
+            Password Manager
+        </h1>
+    </header>
+    {% endblock %}
 
-{% block content %}
-{% endblock %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+
+    {% block navbar %}
+        {{super()}}
+    {% endblock %}
+</body>
+

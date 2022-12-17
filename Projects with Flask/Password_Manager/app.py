@@ -5,16 +5,14 @@ from .models import User
 from . import db
 from .login_form import LoginForm
 from .register_form import Register_Form
-from flask_login import login_required
+from flask_login import login_required, logout_user, current_user, login_user
 import bleach
-
+from flask_login import AnonymousUserMixin
 # from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = create_app()
-
-
 @app.route('/')
 def landing_page():
     """This view is concerned with the initial screen"""
@@ -61,19 +59,25 @@ def register():
 def login():
     """This view handles login form"""
     form = LoginForm()
+    
 
     if form.validate_on_submit():
-        username = request.form['username']
-        password = request.form['password']
+    
+        email = bleach.clean(request.form['email'])
+        password = request.form['password'].strip()
         
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(email=email).first()
 
-        if user is not None:
-            if check_password_hash(user.password, password):
-                return render_template('all_items.html')
-            else:
-                flash('Invalid password or username!')
+        if user is not None and check_password_hash(user.password, password):
+            login_user(user)
+            next = request.args.get('next')
+            if next is None or not next.startswith('/'):
+                next = url_for('user_page', name=user.username)
+                return redirect(next)
+            
         else:
+            flash('Invalid password or username!')
+
             return render_template(
                 'login.html',
                 form=form
@@ -84,15 +88,16 @@ def login():
         form=form
     )
 
-@app.route('/all-items')
+@app.route('/user_page/<name>')
 @login_required
-def home():
-    """This is  the homepage that will display all the "cards" """
-    return render_template('landing_page.html')
+def user_page(name=None):
+    user = current_user
+    return render_template('user_page.html')
 
 @app.route('/logout')
 @login_required
 def logout():
+    logout_user()
     """This view deals with logout"""
     return '<h1>Logout</h1>'
 

@@ -1,0 +1,11 @@
+{% extends "landing_page.html" %}
+
+{% block head %}
+{{super()}}
+{% endblock %}
+
+{% block title %}
+    {% if current_user.is_authenticated %}
+    <h1>Welcome {current_user.username} to your vault!</h1>
+    {% endif %}
+{% endblock %}
