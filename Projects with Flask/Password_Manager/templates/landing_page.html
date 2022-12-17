@@ -23,15 +23,23 @@
     {% block navbar %}
     <nav>
         <br>
+            {% if current_user.is_authenticated %}
             <a id="homeBtn" class="button" href="/">Home</a>
-            <a id="regBtn" class="button" href="/register">Register</a>
+            <a id="logoutBtn" class="button" href="/logout">Logout</a>
+            <a id="allItems" class="button" href="/all-items"></a>
+            {% else %}
+            <a id="homeBtn" class="button" href="/">Home</a>
             <a id="loginBtn" class="button" href="/login">Login</a>
+            <a id="regBtn" class="button" href="/register">Register</a>
+            {% endif %}
         </br>
     </nav>
     {% endblock %}
+    {% block greeting %}
     <p>
         Hello, welcome to my first project with Flask. Hope you enjoy it!
     </p>
+    {% endblock %}
     {% block content %}
     {% endblock %}
 </body>

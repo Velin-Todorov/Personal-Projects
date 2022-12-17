@@ -93,26 +93,8 @@ def home():
     """This is  the homepage that will display all the "cards" """
     return render_template('landing_page.html')
 
-
-@app.route('/bank_cards')
-def banking(name=None):
-    """This view will show bank cards "cards" """
-    return render_template('user.html', name=name)
-
-
-@app.route('/websites')
-def websites():
-    """This view will show the password "cards" for websites"""
-    return '<p>Welcome to our online shop</p>'
-
-
-@app.route('/other')
-def other():
-    """This view is concerned with all other passwords that are not labeled"""
-    return '<h1>Other</h1>'
-
-
 @app.route('/logout')
+@login_required
 def logout():
     """This view deals with logout"""
     return '<h1>Logout</h1>'
