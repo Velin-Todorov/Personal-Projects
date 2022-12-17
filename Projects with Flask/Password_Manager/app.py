@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, flash, current_app, redirect, url_for
-from Password_Manager import login_form, register_form, models
-from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from . import create_app
 from .models import User
 from . import db
+from .login_form import LoginForm
+from .register_form import Register_Form
+from flask_login import login_required
 
 # from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -22,7 +23,7 @@ def landing_page():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """This view handles registration"""
-    form = register_form.Register_Form()
+    form = Register_Form()
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -62,7 +63,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """This view handles login form"""
-    form = login_form.LoginForm()
+    form = LoginForm()
 
     if form.validate_on_submit():
         username = request.form['username']
@@ -86,11 +87,11 @@ def login():
         form=form
     )
 
-
 @app.route('/all-items')
+@login_required
 def home():
     """This is  the homepage that will display all the "cards" """
-    return render_template('home.html')
+    return render_template('landing_page.html')
 
 
 @app.route('/bank_cards')

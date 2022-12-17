@@ -3,12 +3,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% block head %}
     {{super()}}
-    <link rel="stylesheet" href="static/login_page.css">
-    {% endblock %}    
+    {% endblock %}
 </head>
+
 <body>
     {% block header %}
     {{super()}}
@@ -23,35 +24,41 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card">
-                    <h2 class="card-title-text-center">Login</h2>
+                    <h2 class="card-title text-center">Login</h2>
                     <div class="card-body py-md-4">
-                        <form _lpchecked="1" method="post">
-                            {{ form.hidden_tag() }}
-                            {{ form.csrf_token }}
-                            <div class="form-group">
-                                {{form.username.label}} {{form.username()}}
+                        <form method="POST">
+                            {{form.hidden_tag()}}
+                            {{form.csrf_token}}
+
+                            {{form.username.label}}
+                            {{form.username()}}
+
+                            {{form.password.label}}
+                            {{form.password()}}
+
+                            <div>
+                                <br class="submitBtn">
+                                {{form.submit()}}
+                                </br>
                             </div>
 
-                            <div class="form-group">
-                                {{form.password.label}} {{form.password()}}
+                            <div>
+                                <a href="/login">Don't have an account?</a>
                             </div>
-                            {{form.submit()}}
-                            <div class="d-flex flex-row align-items-center justify-content-between">
-                                <a href="/register">Don't have an account?</a>
-                            </div>
-                        </form>
-                        {% with messages = get_flashed_messages() %}
+                            {% with messages = get_flashed_messages() %}
                             {% if messages %}
-                                {% for message in messages %}
-                                    {{message}}
-                                {% endfor %}
+                            {% for message in messages %}
+                            {{message}}
+                            {% endfor %}
                             {% endif %}
-                        {% endwith %}
+                            {% endwith %}
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     {% endblock %}
 </body>
+
 </html>

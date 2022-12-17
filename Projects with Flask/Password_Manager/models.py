@@ -1,4 +1,5 @@
 from . import db
+from . import login_manager
 
 class User(db.Model):
     # type: ignore 
@@ -9,3 +10,6 @@ class User(db.Model):
     username = db.Column(db.String, index=True)
     password = db.Column(db.Text)
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
