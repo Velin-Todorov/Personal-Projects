@@ -6,6 +6,7 @@ from . import db
 from .login_form import LoginForm
 from .register_form import Register_Form
 from flask_login import login_required
+import bleach
 
 # from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -28,10 +29,10 @@ def register():
     if request.method == 'POST':
         if form.validate_on_submit():
 
-            username = request.form['username']
-            email = request.form['email']
-            password = request.form['password']
-            repeat_pass = request.form['repeat_pass']
+            username = bleach.clean(request.form['username'])
+            email = bleach.clean(request.form['email'])
+            password = request.form['password'].strip()
+            repeat_pass = request.form['repeat_pass'].strip()
 
             hashed_pass = generate_password_hash(password)
             hashed_re_pass = generate_password_hash(repeat_pass)
@@ -40,10 +41,6 @@ def register():
 
             exists_username = User.query.filter_by(username=username).first()
             exists_email = User.query.filter_by(email=email).first()
-
-            if len(username) < 3:
-                flash('Username too short!')
-                return render_template('register.html', form=form)
 
             if exists_username is not None or exists_email is not None:
                 flash('User already exists')

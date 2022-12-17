@@ -4,7 +4,7 @@ from . import login_manager
 
 class Password(db.Model):
     __tablename__ = 'user_passwords'
-    user = db.orm.relationship('users')
+    user = db.orm.relationship('User')
     id=db.Column(db.Integer, primary_key=True)
     hashed_password = db.Column(db.Text)
     website = db.Column(db.Text)
