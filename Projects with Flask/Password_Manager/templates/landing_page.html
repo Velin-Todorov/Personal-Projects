@@ -1,17 +1,15 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
+{% block head %}
 <head>
-    {% block head %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/landing_page.css">
+    <link rel="stylesheet" href="static/custom_darkly_bootstrap.css">
     <title>Document</title>
-    {% endblock %}
 </head>
+{% endblock %}
 
 <body>
     {% block header %}
@@ -23,15 +21,17 @@
     {% endblock %}
 
     {% block navbar %}
-    <div class="container">
-        <ul>
-            <li class="homeBtn"><a href="/">Home</a></li>
-            <li class="regBtn"><a href="/register">Register</a></li>
-            <li class="loginBtn"><a href="/login">Login</a></li>
-        </ul>
-    </div>
+    <nav>
+        <br>
+            <a id="homeBtn" class="button" href="/">Home</a>
+            <a id="regBtn" class="button" href="/register">Register</a>
+            <a id="loginBtn" class="button" href="/login">Login</a>
+        </br>
+    </nav>
     {% endblock %}
-
+    <p>
+        Hello, welcome to my first project with Flask. Hope you enjoy it!
+    </p>
     {% block content %}
     {% endblock %}
 </body>
