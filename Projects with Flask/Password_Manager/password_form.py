@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, PasswordField, EmailField, Boolean
 from wtforms.validators import DataRequired, Regexp
 
 class PasswordForm(FlaskForm):
-    name = StringField('Name')
-    uri = StringField('URI')
+    name = StringField('Name', validators=[DataRequired()])
+    uri = StringField('URI', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    submit = StringField('Add')
+    submit = SubmitField('Add')

@@ -7,8 +7,9 @@ class Password(db.Model):
     __tablename__ = 'user_passwords'
     user = db.orm.relationship('User')
     id=db.Column(db.Integer, primary_key=True)
-    hashed_password = db.Column(db.Text)
-    website = db.Column(db.Text)
+    password = db.Column(db.Text)
+    uri = db.Column(db.Text)
+    name = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
 

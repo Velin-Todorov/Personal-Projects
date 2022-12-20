@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, flash, current_app, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from . import create_app
-from .models import User
+from .models import User, Password
 from . import db
 from .login_form import LoginForm
 from .register_form import Register_Form
-from flask_login import login_required, logout_user, current_user, login_user
+from flask_login import login_required, logout_user, current_user, login_user, current_user
 import bleach
 from flask_login import AnonymousUserMixin
 from .password_form import PasswordForm
@@ -107,20 +107,33 @@ def logout():
     """This view deals with logout"""
     return redirect(url_for('landing_page'))
 
-@app.route('/create')
+@app.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
     form = PasswordForm()
 
     if form.validate_on_submit():
-        name = request.form['name']
-        uri = request.form['uri']
-        password = request.form['password']
+        name = bleach.clean(request.form['name'])
+        uri = bleach.clean(request.form['uri'])
+        password = bleach.clean(request.form['password'].strip())
+
+        password = Password(name=name, uri=uri, password=generate_password_hash(password), user_id=current_user.id)
+
+        db.session.add(password)
+        db.session.commit()
+        return redirect(url_for('vault'))        
     
     return render_template(
         'create.html', 
         form=form
     )
+
+@app.route('/vault')
+@login_required
+def vault():
+
+    return render_template('vault.html')
+
 # @app.errorhandler(404)
 # def page_not_found(e):
 #     return render_template('404.html'), 404

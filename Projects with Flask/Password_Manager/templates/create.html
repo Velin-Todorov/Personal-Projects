@@ -9,6 +9,36 @@
     {% endblock %}
 </head>
 <body>
-    
+    {% block header %}
+        {{super()}}
+    {% endblock %}
+    {% block navbar %}
+        {{super()}}
+    {% endblock %}
+    {% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <h2 class="card-title text-center">New Password</h2>
+                    <div class="card-body py-md-4">
+                        <form method="POST">
+                            {{form.hidden_tag()}}
+                            {{form.csrf_token}}
+
+                            {{form.name.label}}
+                            {{form.name()}}
+
+                            {{form.uri.label}}
+                            {{form.uri()}}
+
+                            {{form.password.label}}
+                            {{form.password()}}
+                            <div>
+                                <br class="submitBtn">
+                                {{form.submit()}}
+                                </br>
+                            </div>
+    {% endblock %}
 </body>
 </html>
