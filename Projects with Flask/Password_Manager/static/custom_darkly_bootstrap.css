@@ -187,7 +187,9 @@ sup {
 #logoutBtn,
 #homeBtn,
 #loginBtn,
-#regBtn {
+#regBtn,
+#create,
+#vault {
     color: #00bc8c;
     text-decoration: none;
     background-color: transparent;

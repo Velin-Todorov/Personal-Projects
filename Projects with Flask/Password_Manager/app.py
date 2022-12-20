@@ -8,6 +8,7 @@ from .register_form import Register_Form
 from flask_login import login_required, logout_user, current_user, login_user
 import bleach
 from flask_login import AnonymousUserMixin
+from .password_form import PasswordForm
 # from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -16,7 +17,9 @@ app = create_app()
 @app.route('/')
 def landing_page():
     """This view is concerned with the initial screen"""
-    return render_template('landing_page.html')
+    return render_template(
+        'landing_page.html'
+    )
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -92,15 +95,32 @@ def login():
 @login_required
 def user_page(name=None):
     user = current_user
-    return render_template('user_page.html')
+    return render_template(
+        'user_page.html', 
+        user=user
+    )
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     """This view deals with logout"""
-    return '<h1>Logout</h1>'
+    return redirect(url_for('landing_page'))
 
+@app.route('/create')
+@login_required
+def create():
+    form = PasswordForm()
+
+    if form.validate_on_submit():
+        name = request.form['name']
+        uri = request.form['uri']
+        password = request.form['password']
+    
+    return render_template(
+        'create.html', 
+        form=form
+    )
 # @app.errorhandler(404)
 # def page_not_found(e):
 #     return render_template('404.html'), 404

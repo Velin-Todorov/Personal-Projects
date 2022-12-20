@@ -1,11 +1,21 @@
 {% extends "landing_page.html" %}
 
-{% block head %}
-    {{super()}}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
+<head>
+    {% block head %}
+        {{super()}}
+    {% endblock %}
+</head>
+
+<body>
+    {% block greeting %}
     {% if current_user.is_authenticated %}
-    <h1>Welcome {current_user.username} to your vault!</h1>
+        <h1>Welcome {{current_user.username}}, to your vault!</h1>
     {% endif %}
-{% endblock %}
+    {% endblock %}
+
+</body>
+
+</html>
