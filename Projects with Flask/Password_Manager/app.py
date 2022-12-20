@@ -9,9 +9,9 @@ from flask_login import login_required, logout_user, current_user, login_user, c
 import bleach
 from flask_login import AnonymousUserMixin
 from .password_form import PasswordForm
-# from .validations import check_if_email_in_db, check_if_username_in_db, check_if_passwords_match
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import os
+import cryptography
 
 app = create_app()
 @app.route('/')
@@ -115,23 +115,24 @@ def create():
     if form.validate_on_submit():
         name = bleach.clean(request.form['name'])
         uri = bleach.clean(request.form['uri'])
-        password = bleach.clean(request.form['password'].strip())
+        password_from_form = bleach.clean(request.form['password'].strip())
 
-        password = Password(name=name, uri=uri, password=generate_password_hash(password), user_id=current_user.id)
+        #key = os.environ.get('KEY')
+        #key.encode()
+        password = Password(name=name, uri=uri, password=fernet.encrypt(password_from_form), user_id=current_user.id)
 
         db.session.add(password)
         db.session.commit()
-        return redirect(url_for('vault'))        
+        return redirect(url_for('vault', name=current_user.username))        
     
     return render_template(
         'create.html', 
         form=form
     )
 
-@app.route('/vault')
+@app.route('/vault/<name>')
 @login_required
 def vault():
-
     return render_template('vault.html')
 
 # @app.errorhandler(404)

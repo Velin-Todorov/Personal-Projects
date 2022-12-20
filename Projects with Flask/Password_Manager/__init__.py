@@ -5,10 +5,17 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy_utils as su
 from flask_login import LoginManager, AnonymousUserMixin
 import secrets
+import cryptography
+from cryptography.fernet import Fernet
+import os
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'login'
+key = Fernet.generate_key()
+
+if os.environ.get('KEY') is None:
+    os.environ['KEY'] = str(key)
 
 def secret_key():
     return secrets.token_hex()
