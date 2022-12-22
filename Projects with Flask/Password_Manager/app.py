@@ -130,8 +130,12 @@ def create():
 
         f = Fernet(key)
 
-        password = Password(name=name, uri=uri, password=f.encrypt(
-            password_from_form.encode()), user_id=current_user.id)
+        password = Password(
+            name=name, 
+            uri=uri, 
+            password=f.encrypt(password_from_form.encode()), 
+            user_id=current_user.id
+        )
 
         db.session.add(password)
         db.session.commit()

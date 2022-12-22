@@ -114,7 +114,7 @@ p {
     margin-top: 0;
     margin-bottom: 1rem;
     text-align: center;
-    line-height: 120px;
+    line-height: 70px;
     font-size: 30px;
 }
 
@@ -136,7 +136,12 @@ address {
 
 ul {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: 1rem    
+}
+
+li {
+    line-height: 30px;
+    font-size: 20px;
 }
 
 ol ol,
