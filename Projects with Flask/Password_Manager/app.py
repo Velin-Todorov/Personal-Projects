@@ -114,7 +114,7 @@ def logout():
 @login_required
 def create():
     form = PasswordForm()
-    key = None;
+    key = None
 
     if form.validate_on_submit():
         name = bleach.clean(request.form['name'])
@@ -144,6 +144,19 @@ def create():
 @app.route('/vault/<name>')
 @login_required
 def vault(name):
+
+    user_passwords = Password.query.filter(Password.user_id == current_user.id).all()
+    
+    key = load_key()
+    f = Fernet(key)
+    
+    user_pass = user_passwords[0].password
+
+    print(user_pass)
+    decrypted_password = f.decrypt(user_pass)
+
+    print(decrypted_password.decode())
+
     return render_template('vault.html')
 
 # @app.errorhandler(404)

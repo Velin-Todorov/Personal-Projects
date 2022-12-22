@@ -7,7 +7,7 @@ class Password(db.Model):
     __tablename__ = 'user_passwords'
     user = db.orm.relationship('User')
     id=db.Column(db.Integer, primary_key=True)
-    password = db.Column(db.Text)
+    password = db.Column(db.LargeBinary)
     uri = db.Column(db.Text)
     name = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

@@ -26,7 +26,7 @@
             {% if current_user.is_authenticated %}
             <a id="homeBtn" class="button" href={{ url_for('user_page', name=current_user.username) }}>Home</a>
             <a id="create" class="button" href="/create">Add new password</a>
-            <a id="vault" class="button" href="/vault">Vault</a>
+            <a id="vault" class="button" href={{ url_for('vault', name=current_user.username) }}>Vault</a>
             <a id="logoutBtn" class="button" href="/logout">Logout</a>
             {% else %}
             <a id="homeBtn" class="button" href="/">Home</a>
