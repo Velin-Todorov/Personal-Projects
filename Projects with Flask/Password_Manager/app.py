@@ -145,19 +145,22 @@ def create():
 @login_required
 def vault(name):
 
+    passwords_info = []
     user_passwords = Password.query.filter(Password.user_id == current_user.id).all()
-    
     key = load_key()
     f = Fernet(key)
     
-    user_pass = user_passwords[0].password
+    for attr in user_passwords:
+        password_obj = {
+            'name': attr.name,
+            'uri': attr.uri,
+            'password': f.decrypt(attr.password).decode()
+        }
+        passwords_info.append(password_obj)
 
-    print(user_pass)
-    decrypted_password = f.decrypt(user_pass)
 
-    print(decrypted_password.decode())
 
-    return render_template('vault.html')
+    return render_template('vault.html', user_passwords = passwords_info)
 
 # @app.errorhandler(404)
 # def page_not_found(e):

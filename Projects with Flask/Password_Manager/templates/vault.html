@@ -8,6 +8,24 @@
     {% endblock %}
 </head>
 <body>
+    {% block navbar %}
+    {{super()}}
+    {% endblock %}
+
+    {% block content %}
     <h1>Vault</h1>
+    <br>
+    <ul id='userPasswords'>
+    {% for obj in user_passwords %}
+        <li>
+            Name: {{obj['name']}}
+            URI: {{obj['uri']}}
+            Password: {{obj['password']}}
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% endblock %}
+
 </body>
 </html>
