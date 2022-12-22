@@ -15,8 +15,9 @@ from cryptography.fernet import Fernet
 from .encryption import generate_key, load_key
 
 
-
 app = create_app()
+
+
 @app.route('/')
 def landing_page():
     """This view is concerned with the initial screen"""
@@ -65,22 +66,18 @@ def register():
 def login():
     """This view handles login form"""
     form = LoginForm()
-    
 
     if form.validate_on_submit():
-    
+
         email = bleach.clean(request.form['email'])
         password = request.form['password'].strip()
-        
+
         user = User.query.filter_by(email=email).first()
 
         if user is not None and check_password_hash(user.password, password):
             login_user(user)
-            next = request.args.get('next')
-            if next is None or not next.startswith('/'):
-                next = url_for('user_page', name=user.username)
-                return redirect(next)
-            
+            return redirect(url_for('user_page', name=user.username))
+
         else:
             flash('Invalid password or username!')
 
@@ -94,14 +91,16 @@ def login():
         form=form
     )
 
+
 @app.route('/user_page/<name>')
 @login_required
 def user_page(name=None):
     user = current_user
     return render_template(
-        'user_page.html', 
+        'user_page.html',
         user=user
     )
+
 
 @app.route('/logout')
 @login_required
@@ -109,6 +108,7 @@ def logout():
     logout_user()
     """This view deals with logout"""
     return redirect(url_for('landing_page'))
+
 
 @app.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -127,29 +127,32 @@ def create():
         else:
             generate_key()
             key = load_key()
-        
+
         f = Fernet(key)
 
-        password = Password(name=name, uri=uri, password=f.encrypt(password_from_form.encode()), user_id=current_user.id)
+        password = Password(name=name, uri=uri, password=f.encrypt(
+            password_from_form.encode()), user_id=current_user.id)
 
         db.session.add(password)
         db.session.commit()
-        return redirect(url_for('vault', name=current_user.username))        
-    
+        return redirect(url_for('vault', name=current_user.username))
+
     return render_template(
-        'create.html', 
+        'create.html',
         form=form
     )
+
 
 @app.route('/vault/<name>')
 @login_required
 def vault(name):
 
     passwords_info = []
-    user_passwords = Password.query.filter(Password.user_id == current_user.id).all()
+    user_passwords = Password.query.filter(
+        Password.user_id == current_user.id).all()
     key = load_key()
     f = Fernet(key)
-    
+
     for attr in user_passwords:
         password_obj = {
             'name': attr.name,
@@ -158,9 +161,7 @@ def vault(name):
         }
         passwords_info.append(password_obj)
 
-
-
-    return render_template('vault.html', user_passwords = passwords_info)
+    return render_template('vault.html', user_passwords=passwords_info)
 
 # @app.errorhandler(404)
 # def page_not_found(e):
