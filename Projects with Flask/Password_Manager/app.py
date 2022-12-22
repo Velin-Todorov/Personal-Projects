@@ -53,7 +53,7 @@ def register():
             else:
                 db.session.add(user)
                 db.session.commit()
-                return redirect(url_for('landing_page'))
+                return redirect(url_for('login'))
 
     return render_template(
         'register.html',
