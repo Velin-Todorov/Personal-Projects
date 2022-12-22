@@ -11,7 +11,10 @@ from flask_login import AnonymousUserMixin
 from .password_form import PasswordForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
-import cryptography
+from cryptography.fernet import Fernet
+from .encryption import generate_key, load_key
+
+
 
 app = create_app()
 @app.route('/')
@@ -111,15 +114,23 @@ def logout():
 @login_required
 def create():
     form = PasswordForm()
+    key = None;
 
     if form.validate_on_submit():
         name = bleach.clean(request.form['name'])
         uri = bleach.clean(request.form['uri'])
         password_from_form = bleach.clean(request.form['password'].strip())
 
-        #key = os.environ.get('KEY')
-        #key.encode()
-        password = Password(name=name, uri=uri, password=fernet.encrypt(password_from_form), user_id=current_user.id)
+        if os.path.exists(os.path.abspath('secret.key')):
+            key = load_key()
+
+        else:
+            generate_key()
+            key = load_key()
+        
+        f = Fernet(key)
+
+        password = Password(name=name, uri=uri, password=f.encrypt(password_from_form.encode()), user_id=current_user.id)
 
         db.session.add(password)
         db.session.commit()
@@ -132,7 +143,7 @@ def create():
 
 @app.route('/vault/<name>')
 @login_required
-def vault():
+def vault(name):
     return render_template('vault.html')
 
 # @app.errorhandler(404)
