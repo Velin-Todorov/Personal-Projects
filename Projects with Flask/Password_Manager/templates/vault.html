@@ -6,6 +6,7 @@
 <head>
     {% block head %}
     {{super()}}
+    <script src={{ url_for('static', filename='showDetails.js') }} type="application/javascript"></script>
     {% endblock %}
 </head>
 
@@ -25,9 +26,9 @@
     {% for obj in user_passwords %}
         <div class="grid-item">
             <h2>{{obj['name']}}</h2>
-            <h3 style="display: none;">URI: {{obj['uri']}}</h3>
-            <p style="display: none;">Password: {{obj['password']}}</p>
-            <button onclick=showDetails()>Show Password</a>
+            <h3 class="uri" style="display: none;">URI: {{obj['uri']}}</h3>
+            <p class="password" style="display: none;">Password: {{obj['password']}}</p>
+            <button class="showInfo" onclick="showDetails()">Show Password</button>
         </div> 
     {% endfor %}
     </div>

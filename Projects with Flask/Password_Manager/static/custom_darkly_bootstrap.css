@@ -81,6 +81,14 @@ body {
     background-color: #222
 }
 
+.password {
+    font-size: 20px;
+}
+
+.uri {
+    font-size: 20px;
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important
 }
@@ -294,7 +302,8 @@ button {
     justify-self: center;
     height: 200px;
     width: 200px;
-    background-color: rgba(80, 163, 36, 0.986);
+    background-color: #006249;
+    margin-bottom: 1000px;
   }
 
 button:focus {
@@ -401,6 +410,11 @@ progress {
 [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none
 }
+
+.showInfo {
+    line-height: 20px;
+    position: relative;
+} 
 
 ::-webkit-file-upload-button {
     font: inherit;
