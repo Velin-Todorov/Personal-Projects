@@ -2,30 +2,37 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% block head %}
-        {{super()}}
+    {{super()}}
     {% endblock %}
 </head>
+
 <body>
     {% block navbar %}
     {{super()}}
     {% endblock %}
 
+
+    {% block greeting %}
+    {% endblock %}
+
     {% block content %}
     <h1>Vault</h1>
-    <br>
-    <ul id='userPasswords'>
+    <br class="vault-br">
+    <div class="grid-container">
     {% for obj in user_passwords %}
-        <li class="password">
-            Name: {{obj['name']}}
-            URI: {{obj['uri']}}
-            Password: {{obj['password']}}
-        </li>
+        <div class="grid-item">
+            <h2>{{obj['name']}}</h2>
+            <h3 style="display: none;">URI: {{obj['uri']}}</h3>
+            <p style="display: none;">Password: {{obj['password']}}</p>
+            <button onclick=showDetails()>Show Password</a>
+        </div> 
     {% endfor %}
-    </ul>
-
+    </div>
     {% endblock %}
 
 </body>
+
 </html>
