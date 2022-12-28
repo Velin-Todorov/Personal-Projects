@@ -10,6 +10,7 @@ here we look for the index of x
 
 
 def binarySearch(numbers, left, right, x):
+    
     if left > right:  # base case
         return -1
 
@@ -25,3 +26,5 @@ def binarySearch(numbers, left, right, x):
 
 
 print(binarySearch(numbers, left, right, x))
+
+print(hello)
