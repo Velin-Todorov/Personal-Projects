@@ -1,8 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 from . import create_app
+
 
 app = create_app()
 
 @app.route('/')
 def home_page():
-    return '<h1>Welcome to the daily check</h1>'
+    return render_template(
+        
+        'landing_page.html'
+    )

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block navbar %}
+    {{super()}}
+    {% endblock %}
+    {% block content %}
+    {{super()}}
+    <section id="into">
+        <p>Welcome to my second project with Flask.</p>
+        <p>This project is called DailyCheck - a website that shows you the weather around the world and news. This is achived via 2 APIs.</p>
+        <p>The main learning goal for me is to learn how to integrate APIs in a flask app.</p>
+    </section>
+    {% endblock %}
+</body>
+</html>
