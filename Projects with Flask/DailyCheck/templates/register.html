@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-
+{% extends "login.html" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,44 +6,46 @@
 <head>
     {% block head %}
     {{super()}}
-    <link rel="stylesheet" href="/static/login.css">
-    <script src={{ url_for('static', filename='login.js') }} type="application/javascript" defer></script>
+    <link rel="stylesheet" href="/static/register.css">
+    <script src={{ url_for('static', filename='register.js') }} type="application/javascript" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     {% endblock %}
 </head>
 
 <body>
     {% block nav %}
-    {{super()}}
     {% endblock %}
 
     {% block content %}
     <div class="page">
         <div class="container">
             <div class="left">
-                <div class="login">Login</div>
-                <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read
-                </div>
+                <div class="login">Register</div>
+                <div class="eula">By registering in you agree to the ridiculously long terms that you didn't bother to
+                    read</div>
             </div>
             <div class="right">
                 <form class="form" method="POST">
                     {{form.hidden_tag()}}
                     {{form.csrf_token}}
 
-                    {% block form %}
+                    {{form.username.label}}
+                    <u>{{form.username()}}</u>
+
                     {{form.email.label}}
                     {{form.email()}}
-                    
+
                     {{form.password.label}}
                     {{form.password()}}
 
+                    {{form.repass.label}}
+                    {{form.repass()}}
+
                     {{form.submit()}}
-                    {% endblock %}
                 </form>
             </div>
         </div>
     </div>
-
     {% endblock %}
 </body>
 

@@ -14,5 +14,5 @@ class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=5, max=20, message='Username must be between 5 and 20 characters long')])
     email = EmailField('Email', validators=[Email(message='Invalid email', check_deliverability=True)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=64, message='Password must be between 8 and 64 characters')])
-    repeat_password = PasswordField('Repeat Password', validators=[InputRequired()])
-
+    repass = PasswordField('Repeat Password', validators=[InputRequired()])
+    submit = SubmitField('Register')

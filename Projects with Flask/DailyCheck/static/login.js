@@ -31,7 +31,7 @@ document.querySelector('#password').addEventListener('focus', function(e) {
     }
   });
 });
-document.querySelector('#submit').addEventListener('focus', function(e) {
+document.querySelector('#submit').addEventListener('mouseover', function(e) {
   if (current) current.pause();
   current = anime({
     targets: 'path',
