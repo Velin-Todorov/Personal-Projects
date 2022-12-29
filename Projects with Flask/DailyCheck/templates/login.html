@@ -7,7 +7,7 @@
 <head>
     {% block head %}
     {{super()}}
-    <link rel="stylesheet" href="/static/login.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src={{ url_for('static', filename='login.js') }} type="application/javascript" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     {% endblock %}
@@ -26,7 +26,7 @@
                 <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read
                 </div>
             </div>
-            <div class="right">
+            <div class="login-right">
                 <form class="form" method="POST">
                     {{form.hidden_tag()}}
                     {{form.csrf_token}}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% block head %}
     <meta charset="UTF-8">
@@ -8,12 +9,31 @@
     <title>Document</title>
     {% endblock %}
 </head>
+
 <body>
     {% block nav %}
+    <div class="topnav" id="myTopnav">
+        <h2 class="logo">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Bokor&display=swap');
+            </style>
+            Daily Check
+        </h2>
+        {% if current_user.is_authenticated %}
+        <a href="/" class="active">Home</a>
+        <a href="/weather">Weather</a>
+        <a href="/news">News</a>
+        {% else %}
+        <a href="/" class="active">Home</a>
+        <a href="/login" class="active">Login</a>
+        <a href="/register" class="active">Register</a>
+        {% endif %}
+    </div>
     {% endblock %}
 
     {% block content %}
     {% endblock %}
-    
+
 </body>
+
 </html>
