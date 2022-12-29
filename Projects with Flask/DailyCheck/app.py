@@ -7,7 +7,7 @@ from db_models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils import check_user_exist, get_user_from_db
 from . import db
-
+from itsdangerous import TimedJSONWebSignatureSerializer
 
 app = create_app()
 
