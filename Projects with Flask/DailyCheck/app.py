@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 from . import create_app
+from forms import LoginForm, RegisterForm
+import bleach
 
 
 app = create_app()
@@ -12,10 +14,19 @@ def home_page():
     )
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        email = bleach.clean(requests.form['email'])
+        password = requests.form['password'].strip()
+
+
+
     return render_template(
-        'login.html'
+        'login.html',
+        form=form
     )
 
 
