@@ -1,7 +1,13 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for, redirect, flash
 from auth.forms import LoginForm, RegisterForm
 from DailyCheck import db
 from DailyCheck.db_models import User
+from auth.email_confirm import generate_confirmation_token, confirm_token, send_mail
+from DailyCheck import login_manager
+import bleach
+from flask_login import login_required, login_user
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 auth = Blueprint(
 
@@ -60,16 +66,17 @@ def register():
             
             db.session.add(user)
             db.session.commit()
-            token = user.generate_confirmation_token()
-            send_email(
-                user.email,
-                'Confirm your Account using the link below. The link will expire in 2 hours',
-                'email/confirm', 
-                user=user, 
-                token=token
-            )
+            print('User added!')
+            
+            token = generate_confirmation_token(user.email)
+            print('Generated token')
+            confirm_url = url_for('auth.confirm_email', token=token, _external=True)
+            html = render_template('email.html', confirm_url=confirm_url)
+            subject = "Email confirmation"
+            send_mail(user.email, subject, html)
+
             flash('A confirmation email has been sent to you by email.')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
 
 
     return render_template(
@@ -77,4 +84,18 @@ def register():
         form = form
     )
 
-# @auth.route('/email/confirm', method)
+@auth.route('/email/confirm/<token>')
+def confirm_email(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash('The confirmation link is invalid or has expired')
+    user = User.query.filter_by(email=email).first()
+    if user.confirmed:
+        flash('Account already confirmed. Please login')
+    else:
+        user.confirmed = True
+        db.session.add(user)
+        db.session.commit()
+        flash('You have confirmed your account.!')
+    return redirect(url_for('auth.login'))
