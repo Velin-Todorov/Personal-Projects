@@ -1,5 +1,5 @@
 from DailyCheck import db
-from db_models import User
+from DailyCheck.db_models import User
 from werkzeug.security import check_password_hash
 
 def check_user_exist(user: User):

@@ -26,7 +26,7 @@ def create_app():
     csrf.init_app(app)
 
     with app.app_context():
-        import db_models
+        import DailyCheck.db_models
         db.create_all()
 
 

@@ -1,8 +1,7 @@
 from flask_login import UserMixin
 from DailyCheck import db
 from DailyCheck import login_manager
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from app import app
+from itsdangerous import URLSafeTimedSerializer as Serializer
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users_dailyCheck'
@@ -13,7 +12,7 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
 
 
-    def generate_confirmate_token(self, expiration = 7200):
+    def generate_confirmation_token(self, expiration = 7200):
         s = Serializer(app.config['SECRET_KEY'], expiration)
         return s.dumps({'confirm': self.id}).decode('utf-8')
 
