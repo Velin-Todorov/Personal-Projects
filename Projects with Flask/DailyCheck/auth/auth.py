@@ -76,3 +76,5 @@ def register():
         'register.html',
         form = form
     )
+
+# @auth.route('/email/confirm', method)
