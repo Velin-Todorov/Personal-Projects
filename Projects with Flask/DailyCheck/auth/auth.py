@@ -19,16 +19,20 @@ auth = Blueprint(
 
 )
 
+
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
 
     if form.validate_on_submit():
         email = bleach.clean(request.form['email'])
-        password = requests.form['password'].strip()
+        password = request.form['password'].strip()
+
+        from DailyCheck.utils import get_user_from_db
 
         user = get_user_from_db(email, password)
-        if user is not None:
+
+        if user is not None and check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for('user', name=user.username))
 
@@ -45,6 +49,7 @@ def login():
         form=form
     )
 
+
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -56,21 +61,27 @@ def register():
             password = request.form['password'].strip()
             repass = request.form['repass'].strip()
 
-            user = User(email=email, username=username, password = generate_password_hash(password))
+            user = User(email=email, username=username,
+                        password=generate_password_hash(password))
 
-            from utils import check_user_exist, get_user_from_db
+            from utils import check_user_exist
 
             if check_user_exist(user):
                 flash('User already exists')
                 return render_template('register.html', form=form)
-            
+
+            if password != repass:
+                flash("Passwords don't match")
+                return render_template('register.html', form=form)
+
             db.session.add(user)
             db.session.commit()
             print('User added!')
-            
+
             token = generate_confirmation_token(user.email)
             print('Generated token')
-            confirm_url = url_for('auth.confirm_email', token=token, _external=True)
+            confirm_url = url_for('auth.confirm_email',
+                                  token=token, _external=True)
             html = render_template('email.html', confirm_url=confirm_url)
             subject = "Email confirmation"
             send_mail(user.email, subject, html)
@@ -78,11 +89,11 @@ def register():
             flash('A confirmation email has been sent to you by email.')
             return redirect(url_for('auth.login'))
 
-
     return render_template(
         'register.html',
-        form = form
+        form=form
     )
+
 
 @auth.route('/email/confirm/<token>')
 def confirm_email(token):

@@ -28,8 +28,16 @@
                     {{form.hidden_tag()}}
                     {{form.csrf_token}}
 
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <b><p>{{message}}</p></b>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+
                     {{form.username.label}}
-                    <u>{{form.username()}}</u>
+                    {{form.username()}}
 
                     {{form.email.label}}
                     {{form.email()}}
