@@ -7,7 +7,6 @@ from DailyCheck import login_manager
 import bleach
 from flask_login import login_required, login_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from time import sleep
 
 auth = Blueprint(
 
@@ -96,6 +95,7 @@ def register():
 
 
 @auth.route('/email/confirm/<token>')
+@login_required
 def confirm_email(token):
     try:
         email = confirm_token(token)

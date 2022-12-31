@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from DailyCheck import create_app
 import bleach
 from flask_login import logout_user
-from itsdangerous import URLSafeTimedSerializer as Serializer
 from auth.auth import auth
 
 app = create_app()
