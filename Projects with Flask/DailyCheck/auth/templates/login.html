@@ -25,11 +25,19 @@
                 </div>
             </div>
             <div class="login-right">
+                
                 <form class="form" method="POST">
                     {{form.hidden_tag()}}
                     {{form.csrf_token}}
 
-                    {% block form %}
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <b><p>{{message}}</p></b>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+
                     {{form.email.label}}
                     {{form.email()}}
                     
@@ -37,7 +45,7 @@
                     {{form.password()}}
 
                     {{form.submit()}}
-                    {% endblock %}
+                    <a class="register" href="auth/register">Don't have an account?</a>
                 </form>
             </div>
         </div>

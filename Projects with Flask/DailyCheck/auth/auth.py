@@ -7,7 +7,7 @@ from DailyCheck import login_manager
 import bleach
 from flask_login import login_required, login_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from time import sleep
 
 auth = Blueprint(
 
@@ -86,7 +86,7 @@ def register():
             subject = "Email confirmation"
             send_mail(user.email, subject, html)
 
-            flash('A confirmation email has been sent to you by email.')
+            flash('A confirmation mail has been sent to the provided email address.')
             return redirect(url_for('auth.login'))
 
     return render_template(

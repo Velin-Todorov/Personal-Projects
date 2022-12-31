@@ -86,12 +86,23 @@ body {
   margin: 40px;
 }
 
+.register {
+  color: #F1F1F2;
+  float: left;
+  font-size: 15px;
+  font-family: 'Inter UI', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
 .login-right {
   background: #474A59;
   box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
   color: #F1F1F2;
   position: relative;
   width: 50%;
+  min-height: 340px;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
@@ -280,18 +291,18 @@ body {
   box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
   color: #F1F1F2;
   position: relative;
-  height:450px;
   width: 50%;
+  min-height: 470px;
+  overflow: hidden;
 }
 @media (max-width: 767px) {
   .right {
     flex-shrink: 0;
     height: 100%;
     width: 100%;
-    max-height: 450px;
+    max-height: 470px;
   }
 }
-
 
 .form {
   margin: 40px;
