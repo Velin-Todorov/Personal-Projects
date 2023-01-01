@@ -7,6 +7,8 @@ from DailyCheck import login_manager
 import bleach
 from flask_login import login_required, login_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from user.user_views import profile
+
 
 auth = Blueprint(
 
@@ -33,7 +35,7 @@ def login():
 
         if user is not None and check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for('user', name=user.username))
+            return redirect(url_for('user.profile'))
 
         else:
             flash('Invalid password or email')
@@ -75,10 +77,9 @@ def register():
 
             db.session.add(user)
             db.session.commit()
-            print('User added!')
 
             token = generate_confirmation_token(user.email)
-            print('Generated token')
+            
             confirm_url = url_for('auth.confirm_email',
                                   token=token, _external=True)
             html = render_template('email.html', confirm_url=confirm_url)

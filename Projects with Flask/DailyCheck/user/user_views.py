@@ -12,7 +12,9 @@ user = Blueprint(
 
 @user.route('/profile')
 def profile():
-    pass
+    return render_template(
+        'user_page.html'
+    )
 
 @user.route('/saved-posts')
 def saved_posts():
