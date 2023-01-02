@@ -6,69 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="static/style.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container emp-profile">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA_G-LeJSeLumyxICDHZCXVQ_T67SO3jcZd9Btni8&s"
-                            alt="" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5>
-                            {{current_user.username}}
-                        </h5>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="/profile" role="tab"
-                                    aria-controls="home" aria-selected="true">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="history-tab" data-toggle="tab" href="/history" role="tab"
-                                    aria-controls="history" aria-selected="false">History</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Username</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{current_user.username}}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{current_user.email}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-                            <h1>History</h1>
+    <div class="page">
+        <u>
+            <h1 class="profileHeader">
+                {{current_user.username}}'s profile
+            </h1>
+        </u>
+        <img class="pic"
+            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIOEBUNDxAQEA4XEBYPEhAQEBIQEA8VFhEWFxUSFRMYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDisZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOAA4AMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAgMEBgEFB//EADYQAAIAAgYKAQMDBAMBAAAAAAABAgMEERMhMVEFEiIyQWFxgZGhFLHB8AZSYkJy0eEzgpIj/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD9xAAGKbi+pElNxfUiBqo+73LSqj7vctAz0rgUF9K4FAFtGx7fc1GWjY9vuagK5+6/ziZDXP3X+cTIB7DiupuMMOK6m4AYY8X1NxhixfUDw1yN1fnEyGuRur84gWGak49jSZqTj2ApL6LxKC+i8QNBVSN3uWlVI3e4GUlLxXUiSl4rqBtAAGK0ebFo82RAGuCBNJtKuo9s1kvAlYLoTAyznU6lcuRC0ebJUje7FYGiRtV139SyzWS8FdF4l4FE9aqrV1/AptHmy+lYd/szMBZKibaTdayZos1kvBmkby/OBsAhFAqsEZbR5s2R4PoYQJWjzZqhgWSMZuhw7ARs1kvBnmxNNpOpZI1mOfvP84AeWjzZdJWsq3e6+JnNNGw7gTs1kvBXP2aqruheUUrgBTaPNk5LrdTvWTKi2j73YC+zWS8HkcCSbSSdRYRm7r6AZLR5sWjzZEAarCHn5FhDz8loAyxTWnUsFceW8XLwRm4vqRA0QQKNazxJWEPPyKPu9y0DPM2N3iQt4uXgnSuBQBdLi17osMSywh5+SqjY9vuagKY5ahWssUVW8XLwXz91/nEyAWqc3d2LbCHn5M0OK6m4Cqwh5+SpzmruxqMMeL6gTt4uXgtglqJazxMxrkbq/OIHlhDz8kI4tS5YYmgzUnHsBG3i5eCcvb3uBQX0XiBOwh5+SMcCgVaxLyqkbvcCm3i5eD2Ga26ng7iolLxXUDRYQ8/IsIefktAGf5HL2PkcvZQANFjrbVeN4+Pz9FkrBdCYGdx6mziPkcvZCkb3YrAvStOVR78fn6FF4l4Gdw6l+PDIfI5eyVKw7/ZmSZMUK1omklxYGlTNbZqqrKKVMlylXHMUPLi+x8Cm6aibqlbK/d/U+mR8mOJt1ttvN3sDoZ2nZcO4ooutyKYv1NM4S4F1bZ8MEV9tfqWZ+yD2SlafTe3A1/a6z4QA6+iU6TNuUyqLKJVM3Wmrs1V1cTgjbQ9Jxyrq9aHJ/ZlR2HyOXsKG0vw4GCh0yGcq4XfxheKPo0bDuB58fn6PGrPnX2NBRSuAHnyOXsKPX2cCgto+92An8fn6Fjq7VeF5eRm7r6AU/I5ex8jl7KABb8d8h8d8jUAKVOUNzruuHyFk/RRNxfUiBdFBr7Sw5nnx3yLaPu9y0DPC9THjkS+Qsn6I0rgUAWUmkQ6rbdSV7b/OZyOkae50WUCwX3Zfpum68VnC9hY82fMIAACgAAAAAAAJyJ0UuJRQupo63RGkoZkH809pLhzOPLqJSHKjUcPdZrIDufkLJ+iMTtMOGZkkzVHCo4cGqzXReJUR+O+RKGDU2nhyNBVSN3uB58hZP0HOUWyq63cZiUvFdQJ/HfIfHfI1ACu2hz9MW0OfpmQAWxS23WldiRsYsvaNMrBdCYFMuJQqp3MlbQ5+mUUje7FYF83a3bz5+lZrkynFg3srqz6NF4nwP1ZPrihl8EtZ9WB8BgAigAAAAAAAAAAAAD7n6cnt1yf+0P3OhlbG9ccXoyfZzYI+Gsk+juZ2tK4FRO2hz9MjMiUSqV7MxbR97sBGxiy9olDLadbV2JqITd19APLaHP0xbQ5+mZAB7qvJ+BqvJ+DcAIS2qlfwJayzXkxzcX1IgWz1W7r+hXqvJ+DTRt3uWgUUe6uu7qcl+oJmtSIuVS9HWUrgcbpb/mj6/YDIACKAAAAAAAAAAAAAPDu9fXghixrhTu5pHCHcaKWxD/ZD9CoaryfgskKp33GoqpG73As1lmvJGZEqnfwMZKViuoHmq8n4Gq8n4NwAAw6zzfkazzfkD2bi+pE2S1cruBLVWS8AV0fd7lplnup3XdCvWeb8gXUrgclp2Cqc3mkzrqPfXXf1PjfqujbMM1LB6r74Ac0ACKAAAAAAAAAAAAAEMNbqzdR3dCVSqySRymgqNaTocodt9sDrqRdVVd0uKi8qpG73M2s835LJDrd94FRKViupr1VkvB5MhufQCYMOs835Gs835A8BrsYcvqLGHL6geysF0JmWKY06k7sCNtFn9APaRvdis0yoVEq3eyVjDl9QIUXie0yjqbBFLeDVXTJkZuzu3FdtFn9AOJnynLicEWKdTIHRaboDmq1hVcaW0kr2jnSKAAAAAAAAAAAeHp9DRFBtYtaJbCd/N5ID7v6boVnLtIt6O/pDwPo0rgVKa8/oWStvevKigto+92LrGHL6kZkKhVauYFxGbuvoZbaLP6HsMxt1N3YAVg12MOX1FjDl9QLAZfkPJD5DyQEJuL6kTQpSi2nXW7z346zYHtH3e5aZ4o9TZWHMj8h5ICVK4FBetu+K6o+HpPTEMFcEnaiw1nurpmB9qjY9vufH01oSuubJV+MUH3R8ej6RmQR2qibfFPBrKo6ag6XU5XVKLjC8f9gcc1Vc8QdZTdGwUh4KCP8AdD91xPh0zQ02Vfq60OcN/oivngNVXAAAAANFGoEybuQN88F5Ps0PQigdc2qN/t/p75gYNE6JinvWezL4xZ8kdNFJhlpQQqqFQ3HkymKVDW9WGFflxzWldLRT3VDswLCrF82VHSF9F4nL6P0w4KoZtcUGa3l/k6STPhcKjltRJ+gNhVSN3uVfIeSPYY9fZeHICklKxXUv+Os2HKUO0q61eBcDL8h5IfIeSAqBf8bn6HxufoC2VguhMottXZqwuHyeXsCukb3YomTFCnFE6ksWXzWqnMbUMKV9fI5LSdPc6Kpf8awWfNgWaR0rFMrghbhl5cYuv+D5p6CKHsETTrTaeaPAB9rR+nXC0pq1l+5Y90dFRafLm7kabywfg4I9RUd7SKJLjT14IYruKv8AJ8qLREl/0VdGz4MnSU6C6GZFVk3WvZdDpmauML7AfWWh5P7X/wCmfTo+jZMFThlw11YtVv2cu9NTf4+CEzTE+K60aX8bgOzmTYZaricMK5tJHwdIacgTdntPPBHPRzHE64m2826yIFtJpMc11xuvlwXRFQBFC+iUuKVFrQvquD7FB4B1tBpsM6GtXPjDxRvo+8cRR58UuJRwupr3yOt0ZTIZkFontK6KHimVH1CM3dfQq+RyFtrbNWNwGcF/xufofG5+gNAKrdc/At1z8AZ5uL6kS2KU261g7z5enKS5MGqt+K5ZpcWB87TWkdf/AOML2E7/AOT/AMHyQCKAAAAAAAAAAAAAAAAAAAAAPDRQqU5UWtD3WaKAB2UiapkKjhwar/0XS8V1Oc0DS9WOybuid1fBnTQymnW8FeVGoFVuufgW65+AMoJWbyfgWbyfgDVA6oU3hVWcRpSludNij4V1Q8ksDo9OUuzkaqe1Fs81mciAABFAAAAAAAAAAAAAAAAAAAAAAAAE6r1c8Tt9H0u2kqPjVVF1RxB9r9NUnViikvCKGtf3II+4CVm8n4Fm8n4KNoAA5H9TTa5upwS9s+OatKTNedHF/N+jMRQAAAAAAAAAAAAAAAAAAAAAAAAAAC6hzrOZDHlEmUgD9Ehdar7npk0TN15MEX8UvFxrKj//2Q==">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+
     </div>
 </body>
 

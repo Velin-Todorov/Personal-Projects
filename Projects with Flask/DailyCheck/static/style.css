@@ -33,12 +33,28 @@ body {
     text-align: center;
 }
 
+.profileHeader {
+  color: #2D2F36;
+  font-size: 35px;
+  text-align: center;
+  bottom: 600px;
+  left: 630px;
+  position: fixed;
+  text-decoration-line: underline;
+}
+
 @media (max-width: 767px) {
   .page {
     height: auto;
     margin-bottom: 20px;
     padding-bottom: 20px;
   }
+}
+
+.pic{
+  background-color: transparent;
+  position: relative;
+  size: 10px;
 }
 
 .container {

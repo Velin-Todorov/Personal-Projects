@@ -1,95 +1,334 @@
-body{
-  background: -webkit-linear-gradient(left, #29265f, #912b5e);
+@import url('https://rsms.me/inter/inter-ui.css');
+
+::selection {
+  background: #2D2F36;
 }
-.emp-profile{
-  padding: 3%;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  border-radius: 0.5rem;
-  background: #fff;
+
+::-webkit-selection {
+  background: #2D2F36;
 }
-.profile-img{
-  text-align: center;
+
+::-moz-selection {
+  background: #2D2F36;
 }
-.profile-img img{
-  width: 70%;
-  height: 100%;
+
+body {
+  background: rgb(132, 65, 65);
+  font-family: 'Inter UI', sans-serif;
+  margin: 0;
+  padding: 20px;
 }
-.profile-img .file {
-  position: relative;
-  overflow: hidden;
-  margin-top: -20%;
-  width: 70%;
-  border: none;
-  border-radius: 0;
-  font-size: 15px;
-  background: #212529b8;
-}
-.profile-img .file input {
+
+.page {
+  background: #e2e2e5;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
   position: absolute;
-  opacity: 0;
-  right: 0;
-  top: 0;
+  place-content: center;
+  width: calc(100% - 40px);
 }
-.profile-head h5{
-  color: #333;
+
+#intro {
+    text-align: center;
 }
-.profile-head h6{
-  color: #0062cc;
+
+@media (max-width: 767px) {
+  .page {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
 }
-.profile-edit-btn{
-  border: none;
-  border-radius: 1.5rem;
-  width: 70%;
-  padding: 2%;
-  font-weight: 600;
-  color: #6c757d;
-  cursor: pointer;
+
+.container {
+  display: flex;
+  height: 320px;
+  margin: 0 auto;
+  width: 640px;
 }
-.proile-rating{
-  font-size: 12px;
-  color: #818182;
-  margin-top: 5%;
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
 }
-.proile-rating span{
-  color: #495057;
-  font-size: 15px;
-  font-weight: 600;
+
+.left {
+  background: white;
+  height: calc(100% - 40px);
+  top: 20px;
+  position: relative;
+  width: 50%;
 }
-.profile-head .nav-tabs{
-  margin-bottom:5%;
+
+@media (max-width: 767px) {
+  .left {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
 }
-.profile-head .nav-tabs .nav-link{
-  font-weight:600;
-  border: none;
+
+.login {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 50px 40px 40px;
 }
-.profile-head .nav-tabs .nav-link.active{
-  border: none;
-  border-bottom:2px solid #814242;
-}
-.profile-work{
-  padding: 14%;
-  margin-top: -15%;
-}
-.profile-work p{
-  font-size: 12px;
-  color: #818182;
-  font-weight: 600;
-  margin-top: 10%;
-}
-.profile-work a{
-  text-decoration: none;
-  color: #495057;
-  font-weight: 600;
+
+.eula {
+  color: #999;
   font-size: 14px;
+  line-height: 1.5;
+  margin: 40px;
 }
-.profile-work ul{
-  list-style: none;
+
+.login-right {
+  background: #474A59;
+  box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
+  color: #F1F1F2;
+  position: relative;
+  width: 50%;
 }
-.profile-tab label{
-  font-weight: 600;
+
+@media (max-width: 767px) {
+  .login-right {
+    flex-shrink: 0;
+    height: 100%;
+    width: 100%;
+    max-height: 350px;
+  }
 }
-.profile-tab p{
-  font-weight: 600;
-  color: #0062cc;
+
+svg {
+  position: absolute;
+  width: 320px;
+}
+
+path {
+  fill: none;
+  stroke: url(#linearGradient);
+  ;
+  stroke-width: 4;
+  stroke-dasharray: 240 1386;
+}
+
+.form {
+  margin: 40px;
+  position: absolute;
+}
+
+label {
+  color: #c2c2c5;
+  display: block;
+  font-size: 14px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+input {
+  background: transparent;
+  border: 0;
+  color: #f2f2f2;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+  border-bottom: 1px solid white
+}
+
+input::-moz-focus-inner {
+  border: 0;
+}
+
+#submit {
+  color: #707075;
+  margin-top: 40px;
+  transition: color 300ms;
+  border-bottom: none;
+}
+
+#submit:focus {
+  color: #f2f2f2;
+}
+
+#submit:active {
+  color: #d0d0d2;
+}
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.logo {
+    font-family: 'Bokor', cursive;
+    color: #ddd;
+    position: inherit;
+    display: inline;
+    font-size: 35px;
+}
+
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 35px;
+  border-right: ridge;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+@import url('https://rsms.me/inter/inter-ui.css');
+::selection {
+  background: #2D2F36;
+}
+::-webkit-selection {
+  background: #2D2F36;
+}
+::-moz-selection {
+  background: #2D2F36;
+}
+body {
+  background: rgb(132, 65, 65);
+  font-family: 'Inter UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+.page {
+  background: #e2e2e5;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  position: absolute;
+  place-content: center;
+  width: calc(100% - 40px);
+}
+@media (max-width: 767px) {
+  .page {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+}
+.container {
+  display: flex;
+  height: 320px;
+  margin: 0 auto;
+  width: 640px;
+}
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
+}
+.left {
+  background: white;
+  height: calc(100% - 40px);
+  top: 20px;
+  position: relative;
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .left {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+}
+.login {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 50px 40px 40px;
+}
+.eula {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 40px;
+}
+.right {
+  background: #474A59;
+  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  color: #F1F1F2;
+  position: relative;
+  height: 420px;
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .right {
+    flex-shrink: 0;
+    height: 100%;
+    width: 100%;
+    max-height: 410px;
+  }
+}
+
+
+.form {
+  margin: 40px;
+  position: absolute;
+}
+label {
+  color:  #c2c2c5;
+  display: block;
+  font-size: 14px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+input {
+  background: transparent;
+  border: 0;
+  color: #f2f2f2;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+  border-bottom: 1px solid white
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}
+#submit {
+  color: #707075;
+  margin-top: 40px;
+  transition: color 300ms;
+  border-bottom: none;
+}
+#submit:focus {
+  color: #f2f2f2;
+}
+#submit:active {
+  color: #d0d0d2;
 }
