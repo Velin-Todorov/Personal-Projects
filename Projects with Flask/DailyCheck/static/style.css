@@ -33,15 +33,6 @@ body {
     text-align: center;
 }
 
-.profileHeader {
-  color: #2D2F36;
-  font-size: 35px;
-  text-align: center;
-  bottom: 600px;
-  left: 630px;
-  position: fixed;
-  text-decoration-line: underline;
-}
 
 @media (max-width: 767px) {
   .page {
@@ -51,10 +42,28 @@ body {
   }
 }
 
-.pic{
-  background-color: transparent;
+.page-header h1{
+  float: left;
+  margin-top: -10%;
+  margin-left: 5%;
+}
+
+#details {
+  float: right;
+  margin-left: 5%;
+  margin-top: -2%;
+}
+
+.profilePic {
+  float:unset;
+  margin-top:1%;
+}
+
+.detail {
   position: relative;
-  size: 10px;
+  left: 250px;
+  bottom: 250px;
+  font-size: 20px;
 }
 
 .container {
@@ -63,6 +72,8 @@ body {
   margin: 0 auto;
   width: 640px;
 }
+
+
 
 @media (max-width: 767px) {
   .container {

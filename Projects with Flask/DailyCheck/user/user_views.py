@@ -1,5 +1,5 @@
 from flask import Flask, render_template, Blueprint, redirect, url_for, flash
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, logout_user
 
 
 user = Blueprint(
@@ -32,4 +32,11 @@ def weather():
 def history():
     pass
 
+@user.route('/edit-profile')
+def edit():
+    pass
 
+@user.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home_page'))
