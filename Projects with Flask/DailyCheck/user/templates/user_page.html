@@ -27,8 +27,14 @@
             <div class="detail">
                 <h3>Details</h3>
                 <p>Email:{{current_user.email}}</p>
-                <p>Registered on:</p>
-                <p>From:</p>
+                <p>Registered on:
+                    {{ current_user.created_on }}
+                </p>
+                <p>From:
+                    {% if current_user.from_country %}
+                        {{ current_user.from_country }}
+                    {% endif %}
+                </p>
                 <p>Confirmed Email:
                     {% if current_user.confirmed %}
                         Yes.

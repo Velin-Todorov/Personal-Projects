@@ -16,4 +16,5 @@ class RegisterForm(FlaskForm):
     email = EmailField('Email', validators=[Email(message='Invalid email', check_deliverability=True)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=64, message='Password must be between 8 and 64 characters')])
     repass = PasswordField('Repeat Password', validators=[InputRequired()])
+    country= StringField('Country')
     submit = SubmitField('Register')
