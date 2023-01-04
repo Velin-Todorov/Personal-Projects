@@ -59,10 +59,12 @@ def register():
             username = bleach.clean(request.form['username'])
             email = bleach.clean(request.form['email'])
             password = request.form['password'].strip()
+            country = request.form['country'].strip()
             repass = request.form['repass'].strip()
 
             user = User(email=email, username=username,
-                        password=generate_password_hash(password))
+                        password=generate_password_hash(password),
+                        from_country=country)
 
             from utils import check_user_exist
 
