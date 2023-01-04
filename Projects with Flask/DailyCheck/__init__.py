@@ -11,7 +11,7 @@ import os
 mail = Mail()
 db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.login_view = 'login'
+login_manager.login_view = 'auth.login'
 
 def secret_key():
     return secrets.token_hex()

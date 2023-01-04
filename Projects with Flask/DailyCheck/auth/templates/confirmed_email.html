@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    {{super()}}
+    {% endblock %}
+</head>
+<body>
+    {% block nav %}
+    {{super()}}
+    {% endblock %}
+
+    {% block content %}
+    <div class="page">
+        <p>
+            You have successfully confirmed your email.
+            You may now login!
+        </p>
+    </div>
+
+</body>
+</html>

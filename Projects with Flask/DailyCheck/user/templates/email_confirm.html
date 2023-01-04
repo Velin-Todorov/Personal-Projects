@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    {{super()}}
+    {% endblock %}
+</head>
+<body>
+    {% block nav %}
+    {{super()}}
+    {% endblock %}
+
+    {% block content %}
+    <div class="page">
+        <p>
+            A confirmation email has been sent to your email address. Plase check your inbox or spam folder
+        </p>
+    </div>
+    {% endblock %}
+</body>
+</html>

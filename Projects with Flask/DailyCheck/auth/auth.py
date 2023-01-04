@@ -20,7 +20,6 @@ auth = Blueprint(
 
 )
 
-
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -96,7 +95,6 @@ def register():
 
 
 @auth.route('/email/confirm/<token>')
-@login_required
 def confirm_email(token):
     try:
         email = confirm_token(token)
@@ -111,3 +109,10 @@ def confirm_email(token):
         db.session.commit()
         flash('You have confirmed your account.!')
     return redirect(url_for('auth.login'))
+
+
+@auth.route('/email-confirmed')
+def success():
+    render_template(
+        'confirmed_email.html'
+    )

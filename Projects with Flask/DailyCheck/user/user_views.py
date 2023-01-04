@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Blueprint, redirect, url_for, flash
 from flask_login import login_required, login_user, logout_user
-
+from auth.email_confirm import generate_confirmation_token, confirm_token, send_mail
+from flask_login import current_user
 
 user = Blueprint(
     "user",
@@ -40,3 +41,19 @@ def edit():
 def logout():
     logout_user()
     return redirect(url_for('home_page'))
+
+@user.route('/confirm-email')
+def confirm():
+    token = generate_confirmation_token(current_user.email)
+    confirm_url = url_for(
+        'auth.confirm_email',
+        token=token,
+        _external = True
+    )
+    html = render_template('email.html', confirm_url=confirm_url)
+    subject = 'Email confirmation'
+    send_mail(current_user.email, subject, html)
+    logout()
+    return render_template(
+        'email_confirm.html'
+    )
