@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    {{super()}}
+    {% endblock %}
+</head>
+<body>
+    {% block nav %}
+    {{super()}}
+    {% endblock %}
+
+
+    {% block content %}
+    <div class="page">
+        <input class="searchBar" type="text" placeholder="Search...">
+        <button id= "weatherApi"class="weather">Submit</button>
+    </div>
+
+    
+
+    {% endblock %}
+
+</body>
+</html>

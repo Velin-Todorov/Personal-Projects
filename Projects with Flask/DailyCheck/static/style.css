@@ -30,7 +30,7 @@ body {
 }
 
 #intro {
-    text-align: center;
+  text-align: center;
 }
 
 
@@ -42,7 +42,7 @@ body {
   }
 }
 
-.page-header h1{
+.page-header h1 {
   float: left;
   margin-top: -5%;
   margin-left: 5%;
@@ -55,8 +55,8 @@ body {
 }
 
 .profilePic {
-  float:unset;
-  margin-top:1%;
+  float: unset;
+  margin-top: 1%;
 }
 
 .detail {
@@ -170,6 +170,7 @@ input {
   border-bottom: 1px solid white
 }
 
+
 input::-moz-focus-inner {
   border: 0;
 }
@@ -195,11 +196,11 @@ input::-moz-focus-inner {
 }
 
 .logo {
-    font-family: 'Bokor', cursive;
-    color: #ddd;
-    position: inherit;
-    display: inline;
-    font-size: 35px;
+  font-family: 'Bokor', cursive;
+  color: #ddd;
+  position: inherit;
+  display: inline;
+  font-size: 35px;
 }
 
 
@@ -233,21 +234,26 @@ input::-moz-focus-inner {
 }
 
 @import url('https://rsms.me/inter/inter-ui.css');
+
 ::selection {
   background: #2D2F36;
 }
+
 ::-webkit-selection {
   background: #2D2F36;
 }
+
 ::-moz-selection {
   background: #2D2F36;
 }
+
 body {
   background: rgb(132, 65, 65);
   font-family: 'Inter UI', sans-serif;
   margin: 0;
   padding: 20px;
 }
+
 .page {
   background: #e2e2e5;
   display: flex;
@@ -257,6 +263,7 @@ body {
   place-content: center;
   width: calc(100% - 40px);
 }
+
 @media (max-width: 767px) {
   .page {
     height: auto;
@@ -264,12 +271,14 @@ body {
     padding-bottom: 20px;
   }
 }
+
 .container {
   display: flex;
   height: 320px;
   margin: 0 auto;
   width: 640px;
 }
+
 @media (max-width: 767px) {
   .container {
     flex-direction: column;
@@ -277,6 +286,7 @@ body {
     width: 320px;
   }
 }
+
 .left {
   background: white;
   height: calc(100% - 40px);
@@ -284,6 +294,7 @@ body {
   position: relative;
   width: 50%;
 }
+
 @media (max-width: 767px) {
   .left {
     height: 100%;
@@ -292,26 +303,30 @@ body {
     max-height: 270px;
   }
 }
+
 .login {
   font-size: 50px;
   font-weight: 900;
   margin: 50px 40px 40px;
 }
+
 .eula {
   color: #999;
   font-size: 14px;
   line-height: 1.5;
   margin: 40px;
 }
+
 .right {
   background: #474A59;
-  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
   color: #F1F1F2;
   position: relative;
   height: 560px;
   width: 50%;
 
 }
+
 @media (max-width: 767px) {
   .right {
     flex-shrink: 0;
@@ -326,39 +341,58 @@ body {
   margin: 40px;
   position: absolute;
 }
+
 label {
-  color:  #c2c2c5;
+  color: #c2c2c5;
   display: block;
   font-size: 14px;
   height: 16px;
   margin-top: 20px;
   margin-bottom: 5px;
 }
-input {
-  background: transparent;
-  border: 0;
-  color: #f2f2f2;
-  font-size: 20px;
-  height: 30px;
-  line-height: 30px;
-  outline: none !important;
-  width: 100%;
-  border-bottom: 1px solid white
+
+input.searchBar {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: -750px;
+  margin-right: 16px;
+  font-size: 17px;
+  color: white;
+  background-color: #2D2F36;
+  width: 200px;
+  margin-left: 20px;
 }
 
-input::-moz-focus-inner { 
-  border: 0; 
+input::-moz-focus-inner {
+  border: 0;
 }
+
 #submit {
   color: white;
   margin-top: 40px;
   transition: color 300ms;
   border-bottom: none;
-  
+
 }
+
 #submit:focus {
   color: #f2f2f2;
 }
+
 #submit:active {
   color: #d0d0d2;
+}
+
+.weather {
+  color: #2D2F36;
+  float: none;
+  display: inline;
+  text-align: center;
+  width: 100px;
+  margin: 0;
+  padding: 14px;
+  font-size: 14px;
+  margin-left: 235px;
+  margin-top: -45px;
 }

@@ -95,7 +95,6 @@ def register():
         form=form
     )
 
-
 @auth.route('/email/confirm/<token>')
 def confirm_email(token):
     try:

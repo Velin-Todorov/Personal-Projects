@@ -22,8 +22,8 @@
         </h2>
         {% if current_user.is_authenticated %}
         <a href="/user/logout">Logout</a>
-        <a href="/weather">Weather</a>
-        <a href="/news">News</a>
+        <a href="/user/weather">Weather</a>
+        <a href="/user/news">News</a>
         <a href="/user/profile" class="active">Profile</a>
         {% else %}
         <a href="/" class="active">Home</a>

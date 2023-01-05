@@ -24,10 +24,13 @@ def saved_posts():
 @user.route('/news')
 def news():
     pass
+   
 
 @user.route('/weather')
 def weather():
-    pass
+     return render_template(
+        'weather.html'
+    )
 
 @user.route('/history')
 def history():
