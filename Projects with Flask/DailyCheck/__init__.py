@@ -1,11 +1,15 @@
+import mimetypes
+mimetypes.add_type('application/javascript', '.js', True)
+mimetypes.add_type('text/css', '.css')
+
 from flask_wtf.csrf import CSRFProtect
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import secrets
-from flask import Flask
 from flask_mail import Mail
 import os
+
 
 
 mail = Mail()

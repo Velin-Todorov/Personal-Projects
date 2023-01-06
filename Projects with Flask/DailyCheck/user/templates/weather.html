@@ -5,6 +5,7 @@
 <head>
     {% block head %}
     {{super()}}
+    <script src={{ url_for('static', filename='weather.js') }} type="module" defer></script>
     {% endblock %}
 </head>
 <body>
@@ -16,10 +17,12 @@
     {% block content %}
     <div class="page">
         <input class="searchBar" type="text" placeholder="Search...">
-        <button id= "weatherApi"class="weather">Submit</button>
+        <button id="weatherApi" class="weathers">Submit</button>
     </div>
 
-    
+    <main id="content">
+        
+    </main>
 
     {% endblock %}
 
