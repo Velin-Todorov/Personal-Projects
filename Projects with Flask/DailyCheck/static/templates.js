@@ -8,9 +8,11 @@ export function nothingFound() {
 }
 
 
-export async function renderWeatherData(info, city, country) {
+export function renderWeatherData(info, city, country) {
 
-    const data = await info
+    const data = info
+
+    console.log(info)
 
     let el = html`
         <h1> Daily Forecast for ${city}, ${country}</h1>
@@ -19,21 +21,21 @@ export async function renderWeatherData(info, city, country) {
         <div id="forecast">
             <div class="sun">
                 <p class="sunRise">
-                    Sun rose at: ${data['DailyForecasts']['Sun']['Rise']}
+                    Sun rose at: ${data['DailyForecasts'][0]['Sun']['Rise']}
                 </p>
 
                 <p class="sunSet">
-                    Sun set at: ${data['DailyForecasts']['Sun']['Set']}
+                    Sun set at: ${data['DailyForecasts'][0]['Sun']['Set']}
                 </p>
             </div>
 
             <div class="temperature">
                 <p class="minTemp">
-                    Minimum temperature: ${data['DailyForecasts']['Temperature']['Minimum']['Value']}${data['DailyForecasts']['Temperature']['Minimum']['Value']['Unit']}
+                    Minimum temperature: ${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
                 </p>
                 
                 <p class="maxTemp">
-                    Maximum temperature: ${data['DailyForecasts']['Temperature']['Maximum']['Value']}${data['DailyForecasts']['Temperature']['Minimum']['Value']['Unit']}
+                    Maximum temperature: ${data['DailyForecasts'][0]['Temperature']['Maximum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
 
                 </p>
             </div>

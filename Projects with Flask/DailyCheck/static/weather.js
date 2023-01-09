@@ -55,6 +55,7 @@ async function getForecastData(data){
 
     const forecastData = await response.json()
 
+
     render(renderWeatherData(forecastData, cityName, country), document.querySelector('#content'))
 
 }
