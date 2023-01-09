@@ -10,34 +10,46 @@ export function nothingFound() {
 
 export function renderWeatherData(info, city, country) {
 
-    const data = info
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
-    console.log(info)
+    const data = info
+    let date = new Date()
+
+    let regex = /(?<=T)\d+:\d+/g;
+
+    console.log(data)
 
     let el = html`
-        <h1> Daily Forecast for ${city}, ${country}</h1>
-        <div class="day">${new Date()}</div>
+        <h1 class="forecast"> Daily Forecast for ${city}, ${country}
+            <div class="day">${weekday[date.getDay()]}, ${date.getHours()}:${date.getMinutes()}
+            </div>
+        </h1>
         
         <div id="forecast">
             <div class="sun">
-                <p class="sunRise">
-                    Sun rose at: ${data['DailyForecasts'][0]['Sun']['Rise']}
-                </p>
+                <div class="row">
+                    <div class="column">
+                        <div class="sunCard">
+                            <h3>Sun</h3>
+                            <p class="sunRise">
+                            Sun rose at: ${data['DailyForecasts'][0]['Sun']['Rise'].match(regex)[0]} AM
+                            </p>
+                            <p class="sunSet">
+                            Sun set at: ${data['DailyForecasts'][0]['Sun']['Set'].match(regex)[0]} PM
+                            </p>
+                        </div>
 
-                <p class="sunSet">
-                    Sun set at: ${data['DailyForecasts'][0]['Sun']['Set']}
-                </p>
-            </div>
-
-            <div class="temperature">
-                <p class="minTemp">
-                    Minimum temperature: ${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
-                </p>
-                
-                <p class="maxTemp">
-                    Maximum temperature: ${data['DailyForecasts'][0]['Temperature']['Maximum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
-
-                </p>
+                        <div class="tempCard">
+                            <h3>Temperature</h3>
+                            <p class="minTemp">
+                                Minimum temperature: ${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
+                            </p>
+                            <p class="maxTemp">
+                                Maximum temperature: ${data['DailyForecasts'][0]['Temperature']['Maximum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>`
 

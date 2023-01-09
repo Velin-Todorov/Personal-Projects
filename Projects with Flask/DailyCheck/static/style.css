@@ -384,16 +384,6 @@ input::-moz-focus-inner {
 }
 
 .weathers {
-  /* color: #2D2F36;
-  float: none;
-  display: inline;
-  text-align: center;
-  width: 100px;
-  margin: 0;
-  padding: 14px;
-  font-size: 14px;
-  margin-left: 235px;
-  margin-top: -45px; */
   position: absolute;
   top: 0;
   right: 0;
@@ -404,133 +394,51 @@ input::-moz-focus-inner {
   
 }
 
-/* Weather styling */
-.stretch-card>.card {
-  width: 100%;
-  min-width: 100%
+.forecast {
+  top: 4.8%;
+  position: absolute;
+  text-align: center;
+  font:
 }
 
-.flex {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto
+.day {
+  position: absolute;
+  text-align: left;
+  font-size: 20px;
 }
 
-@media (max-width:991.98px) {
-  .padding {
-      padding: 1.5rem
+/* Weather cards css */
+.column {
+  position: absolute;
+  width: 25%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  left: 5%;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.sunCard, .tempCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
   }
 }
-
-@media (max-width:767.98px) {
-  .padding {
-      padding: 1rem
-  }
-}
-
-.padding {
-  padding: 5rem
-}
-
-.grid-margin, .purchace-popup > div {
- margin-bottom: 25px;
-}
-
-.card {
- border: 0;
- border-radius: 2px;
-}
-
-.card-weather {
- background: #e1ecff;
- background-image: linear-gradient(to left bottom, #d6eef6, #dff0fa, #e7f3fc, #eff6fe, #f6f9ff);
-}
-
-.card {
- position: relative;
- display: flex;
- flex-direction: row;
- min-width: 0;
- word-wrap: break-word;
- background-color: #fff;
- background-clip: border-box;
- border: 1px solid rgba(0, 0, 0, 0.125);
- border-radius: 0.25rem;
-}
-
-
-.card-weather .card-body:first-child {
- background: url(https://res.cloudinary.com/dxfq3iotg/image/upload/v1557323760/weather.svg) no-repeat center;
- background-size: cover;
-}
-
-.card .card-body {
- padding: 1.88rem 1.81rem;
-}
-
-.card-body {
- flex: 1 1 auto;
- padding: 1.25rem;
-}
-
-.card-weather .weather-date-location {
- padding: 0 0 38px;
-}
-
-.h3, h3 {
- font-size: 1.56rem;
-}
-
-.h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
- font-family: "Poppins", sans-serif;
- font-weight: 500;
-}
-
-.text-gray, .card-subtitle, .new-accounts ul.chats li.chat-persons a p.joined-date {
- color: #969696;
-}
-
-p {
- font-size: 13px;
-}
-
-.text-gray, .card-subtitle, .new-accounts ul.chats li.chat-persons a p.joined-date {
- color: #969696;
-}
-
-.card-weather .weather-data {
- padding: 0 0 4.75rem;
-}
-
-.mr-auto, .mx-auto {
- margin-right: auto !important;
-}
-
-.display-3 {
- font-size: 2.5rem;
-}
-
-.card-weather .card-body {
- background: #ffffff;
-}
-
-.card-weather .weakly-weather {
- background: #ffffff;
- overflow-x: auto;
-}
-
-.card-weather .weakly-weather .weakly-weather-item {
- flex: 0 0 14.28%;
- border-right: 1px solid #f2f2f2; 
- padding: 1rem;
- text-align: center;
-}
-
-.mb-0, .my-0 {
- margin-bottom: 0 !important;
-}
-
-.card-weather .weakly-weather .weakly-weather-item i {
- font-size: 1.2rem;
-} 
-
