@@ -352,7 +352,7 @@ label {
 }
 
 input.searchBar {
-  position:absolute;
+  position: absolute;
   background-color: rgb(4, 66, 4);
   width: calc(100% - 44px);
   border: black;
@@ -391,14 +391,13 @@ input::-moz-focus-inner {
   height: 45px;
   width: 100px;
   font-size: 20px;
-  
+
 }
 
 .forecast {
   top: 4.8%;
   position: absolute;
   text-align: center;
-  font:
 }
 
 .day {
@@ -417,7 +416,10 @@ input::-moz-focus-inner {
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+.row {
+  margin-top: -15%;
+  position: static
+}
 
 /* Clear floats after the columns */
 .row:after {
@@ -427,18 +429,38 @@ input::-moz-focus-inner {
 }
 
 /* Style the counter cards */
-.sunCard, .tempCard {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+.sunCard,
+.tempCard,
+.realFeelCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* this adds the "card" effect */
   padding: 16px;
   text-align: center;
   background-color: #f1f1f1;
+
+
+}
+
+.dailyData {
+  display: inline-block;
 }
 
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
-    display: block;
+    display: inline-flex;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
   }
+}
+
+.card-columns {
+  column-count: 4;
+
 }
