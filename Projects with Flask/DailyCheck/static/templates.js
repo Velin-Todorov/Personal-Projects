@@ -1,4 +1,6 @@
-import { html, render } from 'https://unpkg.com/lit-html?module';
+import { html, render} from 'https://unpkg.com/lit-html?module';
+import { repeat } from '../static/node_modules/lit-html/directives/repeat.js'
+import {getForecastData} from './weather.js'
 
 export function nothingFound() {
     let el = html`
@@ -26,79 +28,37 @@ export function renderWeatherData(info, city, country) {
         </h1>
 
         <div id="forecast">
-            <div class="card-columns">
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title that wraps to a new line</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
+            <div class="grid">
+                <div class="sunCard">
+                    <h3>Sun</h3>
+                    <p class="sunRise">
+                        Sun rose at: ${data['DailyForecasts'][0]['Sun']['Rise'].match(regex)[0]} AM
+                    </p>
+                    <p class="sunSet">
+                        Sun set at: ${data['DailyForecasts'][0]['Sun']['Set'].match(regex)[0]} PM
+                    </p>
                 </div>
-                <div class="card p-3">
-                    <blockquote class="blockquote mb-0 card-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">
-                            <small class="text-muted">
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </small>
-                        </footer>
-                    </blockquote>
+                <div class="tempCard">
+                    <h3>Temperature</h3>
+                    <p class="minTemp">
+                        Minimum temperature: ${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
+                    </p>
+                    <p class="maxTemp">
+                        Maximum temperature: ${data['DailyForecasts'][0]['Temperature']['Maximum']['Value']}${data['DailyForecasts'][0]['Temperature']['Minimum']['Value']['Unit']}
+                    </p>
                 </div>
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                </div>
-                <div class="card bg-primary text-white text-center p-3">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-                        <footer class="blockquote-footer">
-                            <small>
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </small>
-                        </footer>
-                    </blockquote>
-                </div>
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img" src="..." alt="Card image">
-                </div>
-                <div class="card p-3 text-right">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">
-                            <small class="text-muted">
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </small>
-                        </footer>
-                    </blockquote>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Hello</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                <div>
-
             </div>
         </div>`
+
+    return el
+}
+
+export function renderCityOptions(data){
+    let el = html`
+        <h1 class="forecast">${data.length} result/s found</h1>
+        ${repeat(data, (item) => html`
+            <button id="${item['Key']}" class="button-3" @click="${getForecastData}">${item['EnglishName']}, ${item['Country']['LocalizedName']}</button>
+        `)}`
 
     return el
 }

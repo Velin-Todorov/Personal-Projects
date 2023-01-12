@@ -1,6 +1,6 @@
 import { weatherApiKey } from "./api_key.js";
 import {html, render} from 'https://unpkg.com/lit-html?module';
-import { nothingFound, renderWeatherData } from "./templates.js";
+import { nothingFound, renderWeatherData, renderCityOptions } from "./templates.js";
 
 
 let submit = document.querySelector('#weatherApi')
@@ -26,37 +26,33 @@ async function getLocationKey(){
 
     const data = await response.json()
 
-    getForecastData(data)
+    console.log(data)
+
+    render(renderCityOptions(data),  document.querySelector('#content'))
 
 }
 
-async function getForecastData(data){
-    const info = await data
+export async function getForecastData(ev){
 
-    if (data.length == 0){
-        render(nothingFound(), document.querySelector('#content'))
-    }
+    const key = ev.target.id
 
-    const key = info[0]['Key']
-    const cityName = info[0]['LocalizedName']
-    const country = info[1]['EnglishName']
+    let text = ev.target.textContent.split(', ')
 
     const url = `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
-
+    
     const response = await fetch(url, {
         headers: {
             'Accept-Encoding': 'gzip'
         }
     })
-
+    
     if (!response.ok){
         throw new Error('Something went wrong with fetching your resource')
     }
-
+    
     const forecastData = await response.json()
-
-
-    render(renderWeatherData(forecastData, cityName, country), document.querySelector('#content'))
+    
+    render(renderWeatherData(forecastData, text[0], text[1]), document.querySelector('#content'))
 
 }
 
