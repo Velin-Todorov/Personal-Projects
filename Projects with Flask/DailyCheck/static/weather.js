@@ -25,9 +25,6 @@ async function getLocationKey(){
     }
 
     const data = await response.json()
-
-    console.log(data)
-
     render(renderCityOptions(data),  document.querySelector('#content'))
 
 }
@@ -51,6 +48,8 @@ export async function getForecastData(ev){
     }
     
     const forecastData = await response.json()
+
+    console.log(forecastData)
     
     render(renderWeatherData(forecastData, text[0], text[1]), document.querySelector('#content'))
 

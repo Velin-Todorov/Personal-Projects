@@ -406,49 +406,55 @@ input::-moz-focus-inner {
   font-size: 20px;
 }
 
-/* Weather cards css */
-.column {
-  position: absolute;
-  width: 25%;
-  padding: 0 10px;
-  box-sizing: border-box;
-  left: 5%;
-}
-
-/* Remove extra left and right margins, due to padding in columns */
-.row {
-  margin-top: -15%;
-  position: static
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 /* Style the counter cards */
 
 .grid {
-  display: flex;                       /* establish flex container */
-  flex-wrap: wrap;                     /* enable flex items to wrap */
+  display: grid;                       /* establish flex container */
   justify-content: space-around;
+  grid-template-columns: 10px 10px 10px;
+  color: #444;
   
 }
-.sunCard,
-.tempCard,
-.realFeelCard {
-  flex: 0 0 32%;                       /* don't grow, don't shrink, width */
-  height: 50px;
-  margin-bottom: 5px;
-  background-color: #999;
-}
-.cell:nth-child(3n) {
-  background-color: #F00;
+
+.cell{
+  background-color: rgb(82, 129, 51);
+  margin-top: 10px;
+  padding: 25px;
+  border-radius: 5px;
+  width: 150px;
+  text-align: center;
 }
 
-/* CSS */
+h3 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  text-decoration:solid ;
+}
+
+.Sun {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.Temp {
+  grid-column: 3;
+  grid-row: 1/3;
+}
+
+.realTemp {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.Air {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* CSS for buttons */
 .button-3 {
   appearance: none;
   background-color: #2ea44f;
