@@ -15,37 +15,36 @@
     {% endblock %}
 
     {% block content %}
-    <div class="page">
-        <div class="page-header">
+    <div class="card px-2" style="width: 25rem;">
+        <div class="card-header">
             <h1>{{ current_user.username }}'s Profile</h1>
         </div>
-        <section id="details">
-            <div class="profilePic">
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsiIQva9a3SU2kBlQvS6xjdKBnVltYLY6TEA&usqp=CAU">
-            </div>
-            <div class="detail">
-                <h3>Details</h3>
-                <p>Email:{{current_user.email}}</p>
-                <p>Registered on:
-                    {{ current_user.created_on }}
-                </p>
-                <p>From:
-                    {% if current_user.from_country %}
-                        {{ current_user.from_country }}
-                    {% endif %}
-                </p>
-                <p>Confirmed Email:
-                    {% if current_user.confirmed %}
-                        Yes.
-                    {% else %}
-                        No. <a href="/user/confirm-email">Confirm Email</a>
-                    {% endif %}
-                </p>
-                <a href="/user/edit-profile">Edit Profile</a>
-            </div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsiIQva9a3SU2kBlQvS6xjdKBnVltYLY6TEA&usqp=CAU"
+            class="card-img-top" alt="...">
 
-        </section>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: {{current_user.email}}</li>
+            <li class="list-group-item">Registered on: {{ current_user.created_on }}</li>
+            <li class="list-group-item">From:
+                {% if current_user.from_country %}
+                {{ current_user.from_country }}
+                {% endif %}
+            </li>
+            <li class="list-group-item">
+                Confirmed Email:
+                {% if current_user.confirmed %}
+                Yes.
+                {% else %}
+                No.
+                {% endif %}
+            </li>
+        </ul>
+        <div class="card-body">
+            {% if not current_user.confirmed %}
+            <a href="/user/confirm-email" class="card-link">Confirm Email</a>
+            {% endif %}
+            <a href="/user/edit-profile" class="card-link">Edit Profile</a>
+        </div>
     </div>
     {% endblock %}
 </body>

@@ -27,16 +27,16 @@
                 <ul class="navbar-nav  ml-auto">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item btn btn-space">
-                        <a class="nav-link rounded-pill" href="/user/logout">Logout</a>
+                        <a class="nav-link rounded-pill btn btn-success btn-lg" href="/user/weather">Weather</a>
                     </li>
                     <li class="nav-item btn btn-space">
-                        <a class="nav-link rounded-pill" href="/user/weather">Weather</a>
+                        <a class="nav-link rounded-pill btn btn-success btn-lg" href="/user/news">News</a>
                     </li>
                     <li class="nav-item btn btn-space">
-                        <a class="nav-link rounded-pill text-bg-dark" href="/user/news">News</a>
+                        <a class="nav-link rounded-pill btn btn-success btn-lg" href="/user/profile" class="active">Profile</a>
                     </li>
                     <li class="nav-item btn btn-space">
-                        <a class="nav-link rounded-pill text-bg-dark" href="/user/profile" class="active">Profile</a>
+                        <a class="nav-link rounded-pill btn btn-success btn-lg" href="/user/logout">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item btn btn-space">

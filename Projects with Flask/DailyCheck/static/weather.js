@@ -3,13 +3,13 @@ import {html, render} from 'https://unpkg.com/lit-html?module';
 import { nothingFound, renderWeatherData, renderCityOptions } from "./templates.js";
 
 
-let submit = document.querySelector('#weatherApi')
+let submit = document.querySelector('#submit')
 let apiKey = weatherApiKey()
 
 submit.addEventListener('click', getLocationKey) 
 
 async function getLocationKey(){
-    let input = document.querySelector('.searchBar').value
+    let input = document.querySelector('#searchBar').value
     
     let url = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${input}&details=false&offset=1`
 
