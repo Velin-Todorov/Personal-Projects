@@ -36,6 +36,7 @@ export async function getForecastData(ev){
     let text = ev.target.textContent.split(', ')
 
     const url = `http://dataservice.accuweather.com/currentconditions/v1//${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
+    const url2 = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
     
     const response = await fetch(url, {
         headers: {
@@ -43,21 +44,22 @@ export async function getForecastData(ev){
         }
     })
     
-    if (!response.ok){
+    const response2 = await fetch(url2, {
+        headers: {
+            'Accept-Encoding': 'gzip'
+        }
+    })
+
+    if (!response.ok || !response2.ok){
         throw new Error('Something went wrong with fetching your resource')
     }
     
-    const forecastData = await response.json()
+    const currentData = await response.json()    
+    const forecastData = await response2.json()
 
     console.log(forecastData)
-    
-    render(renderWeatherData(forecastData, text[0], text[1]), document.querySelector('#content'))
+
+    render(renderWeatherData(forecastData, currentData, text[0], text[1]), document.querySelector('#content'))
 
 }
 
-async function get5DayData(ev){
-    
-    const key = ev.target.id
-    const url = ``
-
-}
