@@ -35,7 +35,7 @@ export async function getForecastData(ev){
 
     let text = ev.target.textContent.split(', ')
 
-    const url = `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
+    const url = `http://dataservice.accuweather.com/currentconditions/v1//${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
     
     const response = await fetch(url, {
         headers: {
@@ -55,4 +55,9 @@ export async function getForecastData(ev){
 
 }
 
+async function get5DayData(ev){
+    
+    const key = ev.target.id
+    const url = ``
 
+}
