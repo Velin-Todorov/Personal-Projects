@@ -1,6 +1,6 @@
 import { weatherApiKey } from "./api_key.js";
 import {html, render} from 'https://unpkg.com/lit-html?module';
-import { nothingFound, renderWeatherData, renderCityOptions } from "./templates.js";
+import { nothingFound, renderWeatherData, renderCityOptions } from "./weatherTemplates.js";
 
 
 let submit = document.querySelector('#submit')
@@ -25,6 +25,11 @@ async function getLocationKey(){
     }
 
     const data = await response.json()
+
+    if (data.length == 0){
+        render(nothingFound(),document.querySelector('#content'))
+    }
+
     render(renderCityOptions(data),  document.querySelector('#content'))
 
 }
@@ -57,7 +62,9 @@ export async function getForecastData(ev){
     const currentData = await response.json()    
     const forecastData = await response2.json()
 
-    console.log(forecastData)
+    if (currentData.length == 0 || forecastData.length == 0){
+        render(nothingFound(),document.querySelector('#content'))
+    }
 
     render(renderWeatherData(forecastData, currentData, text[0], text[1]), document.querySelector('#content'))
 
