@@ -1,12 +1,26 @@
-% extends "base.html" %
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% block head %}
     {{super()}}
     {% endblock %}
+
 </head>
+
 <body>
-    
+    {% block content %}
+    <div class="p-3 mb-2 bg-success">
+        <input id="searchBar" style="width:250px; font-size:19.7px" type="text" placeholder="Search...">
+        <button id="submit" class="btn btn-primary btn-sm mb-1 rounded-2" style="width: 100px;">Search</button>
+    </div>
+
+    <main id="content">
+        
+    </main>
+    {% endblock %}
+
 </body>
+
 </html>

@@ -17,24 +17,18 @@ def profile():
         'user_page.html'
     )
 
-@user.route('/saved-posts')
-def saved_posts():
-    pass
-
 @user.route('/news')
 def news():
-    pass
+    return render_template(
+        'news.html'
+    )
    
 
 @user.route('/weather')
 def weather():
      return render_template(
         'weather.html'
-    )
-
-@user.route('/history')
-def history():
-    pass
+)
 
 @user.route('/edit-profile')
 def edit():
