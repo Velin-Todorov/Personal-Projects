@@ -4,9 +4,9 @@ import { repeat } from './node_modules/lit-html/directives/repeat.js'
 
 export function renderArticles(data){
     
-    console.log()
+    console.log(data)
     let el = html`
-        <h1> ${data.length} result/s found
+        <h1>${data['totalResults']} result/s found</h1>
 
             <br>
             
@@ -16,7 +16,7 @@ export function renderArticles(data){
                         <div class="card">
                             <img src="${item.urlToImage}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 href=${item.url} class="card-title">${item.title}</h5>
+                                    <h5 href="${item.url}" class="card-title">${item.title}</h5>
 
                                     <p class="card-text" style="font-size: 15px">
                                         ${item.content}    
@@ -31,9 +31,7 @@ export function renderArticles(data){
                                 </div>
                         </div>
                     </div>`)}
-            </div>
-        </h1>
-    `
+            </div>`
 
     return el
 }

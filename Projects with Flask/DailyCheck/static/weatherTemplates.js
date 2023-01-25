@@ -110,7 +110,7 @@ export function renderWeatherData(forecast, info, city, country) {
                 <div class="card">
                     <img src="https://media.istockphoto.com/id/1291592209/vector/calendar-day-1-number-one.jpg?s=170667a&w=0&k=20&c=d0LHJ9mAhMcXglz5HmYQVsNBzZ_5h4YKKz9RrU5LAd4=" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][0]['Date'])}</h3>
+                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][0]['Date']).toLocaleDateString('en-GB')}</h3>
                             <p class="card-text" style="font-size: 15px">
                                 Minimum temperature: ${forecast['DailyForecasts'][0]['Temperature']['Minimum']['Value']}${forecast['DailyForecasts'][0]['Temperature']['Minimum']['Unit']}
                             </p>
@@ -146,7 +146,7 @@ export function renderWeatherData(forecast, info, city, country) {
                 <div class="card">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4sZfuqFk3eCgYTmdNMzbndDJKuXn_tSWQ4LNFkt3y0Jxr5-_bHmW1S3s9UwR1qNq5W80&usqp=CAU" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][1]['Date'])}</h3>
+                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][1]['Date']).toLocaleDateString('en-GB')}</h3>
 
                             <p class="card-text" style="font-size: 15px">
                                 Minimum temperature: ${forecast['DailyForecasts'][1]['Temperature']['Minimum']['Value']}${forecast['DailyForecasts'][1]['Temperature']['Minimum']['Unit']}
@@ -187,7 +187,7 @@ export function renderWeatherData(forecast, info, city, country) {
                 <div class="card">
                     <img src="https://thumbs.dreamstime.com/b/vector-icon-calendar-day-number-th-month-days-illustration-flat-style-date-week-year-sunday-monday-tuesday-wednesday-207522124.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][2]['Date'])}</h3>
+                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][2]['Date']).toLocaleDateString('en-GB')}</h3>
 
                             <p class="card-text" style="font-size: 15px">
                                 Minimum temperature: ${forecast['DailyForecasts'][2]['Temperature']['Minimum']['Value']}${forecast['DailyForecasts'][2]['Temperature']['Minimum']['Unit']}\n
@@ -214,11 +214,11 @@ export function renderWeatherData(forecast, info, city, country) {
                             </p>
 
                             <p class="card-text" style="font-size: 15px">
-                                Chances of rain during the day: ${forecast['DailyForecasts'][2]['Day']['RainProbability']}
+                                Chances of rain during the day: ${forecast['DailyForecasts'][2]['Day']['RainProbability']}%
                             </p>
 
                             <p class="card-text" style="font-size: 15px">
-                                Chances of rain during the day: ${forecast['DailyForecasts'][2]['Night']['RainProbability']}
+                                Chances of rain during the day: ${forecast['DailyForecasts'][2]['Night']['RainProbability']}%
                             </p>
                         </div>
                 </div>
@@ -228,7 +228,7 @@ export function renderWeatherData(forecast, info, city, country) {
                 <div class="card">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2BS60qXh4QcxWoX4UQax--p8NC8YdPTb0zw&usqp=CAU" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][3]['Date'])}</h3>
+                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][3]['Date']).toLocaleDateString('en-GB')}</h3>
                             <p class="card-text" style="font-size: 15px">
                                 Minimum temperature: ${forecast['DailyForecasts'][3]['Temperature']['Minimum']['Value']}${forecast['DailyForecasts'][3]['Temperature']['Minimum']['Unit']}
                             </p>
@@ -269,7 +269,7 @@ export function renderWeatherData(forecast, info, city, country) {
                 <div class="card">
                     <img src="https://thumbs.dreamstime.com/z/calendar-day-number-five-white-paper-red-border-blue-background-vector-calendar-day-number-five-204813762.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][4]['Date']).toString}</h3>
+                            <h3 class="card-title">${new Date(forecast['DailyForecasts'][4]['Date']).toLocaleDateString('en-GB')}</h3>
 
                             <p class="card-text" style="font-size: 15px">
                                 Minimum temperature: ${forecast['DailyForecasts'][4]['Temperature']['Minimum']['Value']}${forecast['DailyForecasts'][4]['Temperature']['Minimum']['Unit']}
