@@ -2,11 +2,15 @@ import { html, render } from 'https://unpkg.com/lit-html?module';
 import { repeat } from './node_modules/lit-html/directives/repeat.js'
 
 
+const paginationLimit = 8
+let currentPage;
+let pageCount;
+
 export function renderArticles(data){
     
     console.log(data)
     let el = html`
-        <h1>${data['totalResults']} result/s found</h1>
+        <h1> ${data.length} result/s found
 
             <br>
             
@@ -25,13 +29,16 @@ export function renderArticles(data){
                                     <p class="card-text" style="font-size: 15px">
                                         By: ${item.author}
                                     </p>
+
                                     <p class="card-text" style="font-size: 15px">
                                         Published on: ${item.publishedAt}
                                     </p>
                                 </div>
                         </div>
                     </div>`)}
-            </div>`
+            </div>
+        </h1>
+    `
 
     return el
 }
