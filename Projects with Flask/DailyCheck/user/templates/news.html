@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +20,12 @@
     </div>
 
     <main id="content">
-        
     </main>
+
+    <nav class="pagination">
+    {{ pagination.links }}
+    </nav>
+
     {% endblock %}
 
 </body>

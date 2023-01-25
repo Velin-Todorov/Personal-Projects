@@ -23,19 +23,16 @@ async function getArticles(){
 
     const data = await response.json()
     
-}
-
-
-function* displayArticles(data, pageCount){
-    let min = 0;
-    let max = 8;
-    
-    yield data.slice(min, max)
-    
-    min = max
-    max += 9
-
     render(renderArticles(data), document.querySelector('#content'))
 
 }
+
+
+export function pagination(){
+
+    let data = document.getElementsByClassName('col')
+    console.log(data)
+}
+
+pagination()
 

@@ -28,7 +28,7 @@ def create_app():
     csrf = CSRFProtect(app)
 
     app.config['SECRET_KEY'] = secret_key()
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://v3lin:123456@localhost/dailyCheck'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://velin:123456@localhost/dailyCheck'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECURITY_PASSWORD_SALT'] = password_salt()
 
