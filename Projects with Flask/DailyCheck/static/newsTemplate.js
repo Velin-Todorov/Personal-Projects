@@ -37,5 +37,3 @@ export function renderArticles(data, totalResults){
     return el
 }
 
-
-// TODO: Figured out how to do the pagination. I am thinking of using a generator function that will slice the html collection. 
