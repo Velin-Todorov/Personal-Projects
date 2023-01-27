@@ -1,17 +1,15 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import { repeat } from './node_modules/lit-html/directives/repeat.js'
-import { pagination } from './news.js';
 
-export function renderArticles(data){
+export function renderArticles(data, totalResults){
     
-    console.log(data)
     let el = html`
-        <h1> ${data['articles'].length} result/s found</h1>
+        <h1> ${totalResults} result/s found</h1>
 
             <br>
 
             <div class="row m-5">
-                ${repeat(data['articles'], (item) => html`
+                ${repeat(data, (item) => html`
                     <div class="col">
                         <div class="card border-dark mb-5 card text-dark">
                             <img src="${item.urlToImage}" style="max-width:310px; max-height:300px">
@@ -34,17 +32,10 @@ export function renderArticles(data){
                     </div>`)}
             </div>
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><button @click="${pagination}" class="page-link" href="#">Previous</button></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+
     `
     return el
 }
+
 
 // TODO: Figured out how to do the pagination. I am thinking of using a generator function that will slice the html collection. 

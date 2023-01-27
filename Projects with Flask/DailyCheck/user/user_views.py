@@ -12,31 +12,21 @@ user = Blueprint(
     url_prefix="/user"
 )
 
+
 @user.route('/profile')
 def profile():
     return render_template(
         'user_page.html'
     )
 
+
 @user.route('/news')
 def news():
 
-    search = True
-    q = request.args.get('q')
-    if q:
-        search = True
-
-    page = request.args.get(get_page_parameter(), type=int, default=1)
-
-    pagination = Pagination(page=page, search=search)
-    pagination.per_page = 10
-    pagination.page_parameter = 'page'
-
     return render_template(
         'news.html',
-         pagination=pagination
     )
-   
+
 
 @user.route('/weather')
 def weather():
@@ -44,9 +34,11 @@ def weather():
         'weather.html'
     )
 
+
 @user.route('/edit-profile')
 def edit():
     pass
+
 
 @user.route('/logout')
 def logout():
@@ -60,7 +52,7 @@ def confirm():
     confirm_url = url_for(
         'auth.confirm_email',
         token=token,
-        _external = True
+        _external=True
     )
     html = render_template('email.html', confirm_url=confirm_url)
     subject = 'Email confirmation'
