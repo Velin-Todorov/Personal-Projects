@@ -19,3 +19,10 @@ def get_user_from_db(email, password):
     
     return None
 
+def check_username_exists(new_username):
+    user = User.query.filter_by(username=new_username).first()
+
+    if user is not None:
+        return True
+    
+    return False

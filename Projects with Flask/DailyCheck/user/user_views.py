@@ -7,7 +7,8 @@ from DailyCheck import db
 from DailyCheck.db_models import User
 from user.forms import ChangePassword, ChangeUsername
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import bleach
+from utils import check_username_exists
 
 user = Blueprint(
     "user",
@@ -136,43 +137,27 @@ def change_username():
     user = User.query.filter_by(id=current_user.id).first()
 
     if form.validate_on_submit():
+        new_username = bleach.clean(request.form['new_username'].strip())
 
-        new_password = request.form['new_password'].strip()
-        repeat_pass = request.form['repass'].strip()
-
-        if check_password_hash(current_user.password, old_password):
-
-            if new_password == old_password:
-                flash('Your new password cannot be your old password!')
-
-                return render_template(
-                    'change_password.html',
-                    form=form
-                )
-
-            if new_password != repeat_pass:
-                flash("Passwords don't match!")
-                return render_template(
-                    'change_password.html',
-                    form=form
-                )
-
-            user.password = generate_password_hash(new_password)
-            db.session.commit()
-
-            logout()
-            flash('Password successfully changed! You can now login with your new password')
-            return redirect(url_for('auth.login'))
-
-        else:
-            flash('Wrong password')
+        print(new_username)
+        print(check_username_exists(new_username))
+        
+        if check_username_exists(new_username):
+            flash("Username already in use!")
             return render_template(
-                'change_password.html',
+                'change_username.html',
                 form=form
             )
+
+        user.username = new_username
+        db.session.commit()
+
+        print('Name changed successfully')
+        flash('Username successfully changed!')
+        return redirect(url_for('user.profile'))
     
     return render_template(
-        'change_password.html',
+        'change_username.html',
         form=form
     )
 
