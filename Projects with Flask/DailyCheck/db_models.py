@@ -35,14 +35,6 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         return True
 
-
-class SavedPosts(db.Model):
-    __tablename__ = 'saved_posts'
-    user = db.orm.relationship('User')
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users_dailyCheck.id'))
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
