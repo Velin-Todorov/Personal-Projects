@@ -11,5 +11,5 @@ class ChangePassword(FlaskForm):
 
 
 class ChangeUsername(FlaskForm):
-    new_username = StringField('New username', validators=[InputRequired()])
+    new_username = StringField('New username', validators=[InputRequired(), Length(min=5, max=20, message='Username must be between 5 and 20 characters long')])
     submit = SubmitField('Change Username')
