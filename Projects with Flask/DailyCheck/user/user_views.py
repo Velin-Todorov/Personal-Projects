@@ -84,7 +84,6 @@ def change_password():
 
     user = User.query.filter_by(id=current_user.id).first()
 
-    print('before validating form')
     if form.validate_on_submit():
 
         old_password = request.form['old_password'].strip()
@@ -114,7 +113,7 @@ def change_password():
             logout()
             flash('Password successfully changed! You can now login with your new password')
             return redirect(url_for('auth.login'))
-            
+
         else:
             flash('Wrong password')
             return render_template(
@@ -126,3 +125,55 @@ def change_password():
         'change_password.html',
         form=form
     )
+
+
+@user.route('/change-username', methods=['GET', 'POST'])
+@login_required
+def change_username():
+
+    form = ChangeUsername()
+
+    user = User.query.filter_by(id=current_user.id).first()
+
+    if form.validate_on_submit():
+
+        new_password = request.form['new_password'].strip()
+        repeat_pass = request.form['repass'].strip()
+
+        if check_password_hash(current_user.password, old_password):
+
+            if new_password == old_password:
+                flash('Your new password cannot be your old password!')
+
+                return render_template(
+                    'change_password.html',
+                    form=form
+                )
+
+            if new_password != repeat_pass:
+                flash("Passwords don't match!")
+                return render_template(
+                    'change_password.html',
+                    form=form
+                )
+
+            user.password = generate_password_hash(new_password)
+            db.session.commit()
+
+            logout()
+            flash('Password successfully changed! You can now login with your new password')
+            return redirect(url_for('auth.login'))
+
+        else:
+            flash('Wrong password')
+            return render_template(
+                'change_password.html',
+                form=form
+            )
+    
+    return render_template(
+        'change_password.html',
+        form=form
+    )
+
+
