@@ -11,7 +11,7 @@ export function renderArticles(data, totalResults){
             ${data.map((item) => html`
                 <div class="col-md-5 offset-md-3" style="align-items: center">
                     <div class="card border-dark mb-5 card text-dark">
-                        <img src="${item.urlToImage}" style="width:720px; height:720px">
+                        <img src="${item.urlToImage}" style="aspect-ratio: 1 / 1; object-fit:cover;">
                             <div class="card-body" style="height:auto; width:auto;">
                                                                     
                                 <h5 class="card-title" style="font-size: 30px; display: inline;"> 
