@@ -33,3 +33,4 @@ Werkzeug==2.2.2
 WTForms==3.0.1
 # xmlrpclib==1.0.1
 # zipp==1.0.0
+psycopg2

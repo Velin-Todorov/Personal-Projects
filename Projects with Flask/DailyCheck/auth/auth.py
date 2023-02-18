@@ -63,7 +63,7 @@ def register():
             repass = request.form['repass'].strip()
 
             user = User(email=email, username=username,
-                        password=generate_password_hash(password),
+                        password=generate_password_hash(password, ),
                         from_country=country)
 
             from utils import check_user_exist

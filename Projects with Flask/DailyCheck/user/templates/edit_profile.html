@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    {{super()}}
+    <title>Edit profile</title>
+    {% endblock %}
+</head>
+<body>
+
+    {% block nav %}
+    {{super()}}
+    {% endblock %}
+    
+
+    {% block content %}
+
+    <main id="content">
+        <div class="row m-3">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="card bg-success">
+                <div class="card-body">
+                  <h5 class="card-title">Change Password</h5>
+                  <p class="card-text">Click here to change your password</p>
+                  <a href="/user/change-password" class="btn btn-primary">Change password</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card bg-success">
+                <div class="card-body">
+                  <h5 class="card-title">Change username</h5>
+                  <p class="card-text">Click here to change your username</p>
+                  <a href="/user/change-username" class="btn btn-primary">Change username</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </main>
+    
+
+
+    {% endblock %}
+
+
+
+</body>
+</html>

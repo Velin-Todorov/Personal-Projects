@@ -3,6 +3,7 @@ from DailyCheck import db
 from DailyCheck import login_manager
 from itsdangerous import URLSafeTimedSerializer as Serializer
 import datetime
+import hashlib
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users_dailyCheck'
@@ -35,12 +36,11 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         return True
 
-
-class SavedPosts(db.Model):
-    __tablename__ = 'saved_posts'
-    user = db.orm.relationship('User')
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users_dailyCheck.id'))
+    def gravatar(self, size=100, default='identicon', rating='g'):
+        url='https://secure.gravatar.com/avatar'
+        hash = hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+        url=url, hash=hash, size=size, default=default, rating=rating)
 
 
 @login_manager.user_loader
