@@ -7,46 +7,37 @@ import itertools
 import secrets
 
 
-#logging.basicConfig(format="%(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(message)s", level=logging.DEBUG)
 
 JOIN = {}
-# async def handler(websocket):
-#     game = Connect4()
-#     turns = itertools.cycle([PLAYER1, PLAYER2])
-#     current_player = next(turns)
+async def play(websocket, game, player, connected):
+    async for message in websocket:
 
-#     async for message in websocket:
+        event = json.loads(message)
+        assert event['type'] == 'play'
+        column = event['column']
 
-#         parsed_message = json.loads(message)
-#         column = parsed_message['column']
+        try:
+            row = game.play(player, int(column))
 
-#         try:
-#             row = game.play(current_player, int(column))
+        except RuntimeError as e:
+            await error(websocket, str(e))
 
-#             event = {
-#                 'type': 'play',
-#                 'player': current_player,
-#                 'column': column,
-#                 'row': row
-#             }
-#             await websocket.send(json.dumps(event))
 
-#         except RuntimeError as e:
-#             print(e)
-#             print('Runtime Error happened')
-#             event = {
-#                 'type': 'error'
-#             }
-#             await websocket.send(json.dumps(event))
-
-#         if game.winner is not None:
-#             event = {
-#                 'type': 'win',
-#                 'player': current_player
-#             }
-#             await websocket.send(json.dumps(event))
-
-#         current_player = next(turns)
+        event = {
+            'type': 'play',
+            'player': player,
+            'column': column,
+            'row': row
+        }
+        
+        
+        if game.winner is not None:
+            event = {
+                'type': 'win',
+                'player': game.winner
+            }
+        websocket.send(json.dumps(event))
 
 async def error(websocket, message):
     event = {
@@ -60,7 +51,6 @@ async def join(websocket, join_key):
     print('Entered join()')
     try:
         game, connected = JOIN[join_key]
-        print(JOIN)
 
     except KeyError:
         await error(websocket, "Game not found")
@@ -69,6 +59,7 @@ async def join(websocket, join_key):
     connected.add(websocket)
     try:
         print('second player joined the game', id(game))
+        await play(websocket, game, PLAYER2, connected)
 
         async for message in websocket:
             print('second player sent', message)
@@ -92,6 +83,7 @@ async def start(websocket):
         }
 
         await websocket.send(json.dumps(event))
+        await play(websocket, game, PLAYER1, connected)
 
         print("first player started game", id(game))
 
@@ -106,8 +98,6 @@ async def handler(websocket):
     assert event['type'] == 'init'
 
     if 'join' in event:
-        print('I am here')
-        print(event)
         await join(websocket, event['join'])
 
     else:
