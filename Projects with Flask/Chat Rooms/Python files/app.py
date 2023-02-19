@@ -6,9 +6,10 @@ from connect4 import PLAYER1, PLAYER2, Connect4
 
 async def handler(websocket):
     game = Connect4()
+    current_player = PLAYER1
 
     async for message in websocket:
-        current_player = game.last_player
+        print(current_player)
         print(message)
         parsed_message = json.loads(message)
         column = parsed_message['column']
@@ -22,14 +23,6 @@ async def handler(websocket):
                 'column': column,
                 'row': row
             }
-            print(game.last_player)
-            if game.last_player_won:
-                event = {
-                    'type': 'win',
-                    'player': current_player
-                }                
-                await websocket.send(json.dumps(event))
-         
             await websocket.send(json.dumps(event))
 
         except RuntimeError as e:
@@ -39,7 +32,19 @@ async def handler(websocket):
                 'type': 'error'
             }
             await websocket.send(json.dumps(event))
-#        current_player = PLAYER2
+
+        if game.last_player_won:
+            event = {
+                'type': 'win',
+                'player': current_player
+            }
+            await websocket.send(json.dumps(event))
+
+        if current_player == PLAYER1:
+            current_player = PLAYER2
+        else:
+            current_player = PLAYER1
+
 
 async def main():
     """This is a coroutine that starts a websocket server."""
