@@ -2,15 +2,18 @@ import asyncio
 import websockets
 import json
 from connect4 import PLAYER1, PLAYER2, Connect4
+import logging
+import itertools
 
+logging.basicConfig(format="%(message)s", level=logging.DEBUG)
 
 async def handler(websocket):
     game = Connect4()
-    current_player = PLAYER1
+    turns = itertools.cycle([PLAYER1, PLAYER2])
+    current_player = next(turns)
 
     async for message in websocket:
-        print(current_player)
-        print(message)
+   
         parsed_message = json.loads(message)
         column = parsed_message['column']
 
@@ -33,17 +36,14 @@ async def handler(websocket):
             }
             await websocket.send(json.dumps(event))
 
-        if game.last_player_won:
+        if game.winner is not None:
             event = {
                 'type': 'win',
                 'player': current_player
             }
             await websocket.send(json.dumps(event))
 
-        if current_player == PLAYER1:
-            current_player = PLAYER2
-        else:
-            current_player = PLAYER1
+        current_player = next(turns)
 
 
 async def main():
