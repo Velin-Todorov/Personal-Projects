@@ -10,7 +10,11 @@ window.addEventListener('DOMContentLoaded', () => {
     sendMoves(board, websocket)
 })
 
-function sendMoves(board, websocket) {
+function sendMoves(board, websocket) {  
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('watch')){
+        return;
+    }
     board.addEventListener('click', (ev) => {
         const column = ev.target.dataset.column
 
@@ -37,6 +41,7 @@ function receiveMoves(board, websocket) {
             
             case "init":
                 document.querySelector('.join').href = '?join=' + event.join;
+                document.querySelector('.watch').href = "?watch=" + event.watch
                 break
 
             case "play":
@@ -51,7 +56,7 @@ function receiveMoves(board, websocket) {
             case "error":
                 showMessage(event.message);
                 break;
-
+            
             default:
                 throw new Error(`Unsupported event type: ${event.type}.`);
         }
@@ -68,6 +73,10 @@ function initGame(websocket) {
 
         if (params.has('join')) {
             event.join = params.get('join');
+        }
+
+        else if (params.has("watch")) {
+            event.watch = params.get('watch')
         }
 
         websocket.send(JSON.stringify(event))
