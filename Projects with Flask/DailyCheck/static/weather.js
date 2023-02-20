@@ -10,8 +10,7 @@ submit.addEventListener('click', getLocationKey)
 
 async function getLocationKey(){
     let input = document.querySelector('#searchBar').value
-    
-    let url = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${input}&details=false&offset=1`
+   
 
     const response = await fetch(url, {
         method: 'GET',
