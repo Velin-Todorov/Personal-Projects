@@ -28,15 +28,14 @@ def create_app():
     csrf = CSRFProtect(app)
 
     app.config['SECRET_KEY'] = secret_key()
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://velin:123456@localhost/dailyCheck'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECURITY_PASSWORD_SALT'] = password_salt()
 
     # mail configurations
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USERNAME'] = 'dailycheckflask@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'mocbtwmyovznirpk'
+    
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
 
