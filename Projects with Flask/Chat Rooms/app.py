@@ -1,18 +1,21 @@
-#!/usr/bin/python3
+from flask import Flask
+from flask_wtf.csrf import CSRFProtect
+import os
 
-import logging
-import asyncio
-import websockets
 
-async def handler(websocket):
-    while True:
-        message = await websocket.recv()
-        print(message)
+def secret_key():
+    return os.urandom(12) 
 
-async def main():
-    async with websockets.serve(handler, "", 8001):
-        await asyncio.Future()
 
-if __name__ == "__main__":
-    asyncio.run(main())
 
+def create_app():
+
+    app = Flask(__name__)
+    csrf = CSRFProtect(app)
+    manager = Couc
+
+    app.config['SECRET_KEY'] = secret_key()
+
+
+
+    csrf.init_app(app)
