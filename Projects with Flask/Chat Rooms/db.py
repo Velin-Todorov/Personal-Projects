@@ -1,2 +1,1 @@
-from couchdb import Server
 
