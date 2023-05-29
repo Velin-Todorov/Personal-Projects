@@ -16,7 +16,7 @@ async function getArticles(){
 
     const searchTerm = document.querySelector('#searchBar').value
 
-    const url = `https://newsapi.org/v2/everything?q=${searchTerm}&apiKey=${apiKey}`
+
 
     const response = await fetch(url)
 

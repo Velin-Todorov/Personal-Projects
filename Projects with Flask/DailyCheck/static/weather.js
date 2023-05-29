@@ -10,8 +10,7 @@ submit.addEventListener('click', getLocationKey)
 
 async function getLocationKey(){
     let input = document.querySelector('#searchBar').value
-    
-    let url = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${input}&details=false&offset=1`
+   
 
     const response = await fetch(url, {
         method: 'GET',
@@ -40,9 +39,6 @@ export async function getForecastData(ev){
 
     let text = ev.target.textContent.split(', ')
 
-    const url = `http://dataservice.accuweather.com/currentconditions/v1//${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
-    const url2 = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&language=en-us&details=true&metric=true`
-    
     const response = await fetch(url, {
         headers: {
             'Accept-Encoding': 'gzip'
