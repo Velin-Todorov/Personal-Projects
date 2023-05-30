@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
+get_env = os.getenv
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -80,6 +84,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Email server configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST  = get_env('EMAIL_HOST')
+EMAIL_HOST_USER  = get_env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD  = get_env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT  = get_env('EMAIL_PORT')
+EMAIL_USE_TLS  = get_env('EMAIL_USE_SSL')
 
 
 # Password validation
