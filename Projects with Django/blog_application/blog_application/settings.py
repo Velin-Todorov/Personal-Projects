@@ -86,12 +86,12 @@ DATABASES = {
 }
 
 # Email server configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST  = get_env('EMAIL_HOST')
 EMAIL_HOST_USER  = get_env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD  = get_env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT  = get_env('EMAIL_PORT')
-EMAIL_USE_TLS  = get_env('EMAIL_USE_SSL')
+EMAIL_PORT  = 587
+EMAIL_USE_TLS  = True
 
 
 # Password validation

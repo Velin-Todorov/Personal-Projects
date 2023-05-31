@@ -50,7 +50,7 @@ def login():
     )
 
 
-@auth.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['POST'])
 def register():
     form = RegisterForm()
 
