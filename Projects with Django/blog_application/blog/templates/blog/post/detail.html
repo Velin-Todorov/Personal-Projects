@@ -13,6 +13,23 @@
         Share this post
     </a>
 </p>
+
+<h2>
+    Similar Posts:
+    <ol>
+    {% for post in similar_posts %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </li>
+    {% empty %}
+        There are no similar posts yet
+    {% endfor %}
+    </ol>
+</h2>
+
+
+
+
 {% with comments.count as total_comments %}
     <h2>
         {{ total_comments }} comment{{ total_comments|pluralize }}
