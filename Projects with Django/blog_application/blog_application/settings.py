@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
