@@ -1,8 +1,7 @@
 from django.db import models
-from django import forms
-
+from django.contrib.auth.models import User
 # Create your models here.
-class User(models.Model):
+class Uuser(models.Model):
     
     class Verified(models.TextChoices):
         YES = 'Y', 'Yes'
@@ -21,3 +20,4 @@ class User(models.Model):
         default=Verified.NO
     )
     followers = models.BigIntegerField(default=0)
+    
