@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_extensions'
+    'django_extensions',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -109,14 +110,15 @@ AUTH_PASSWORD_VALIDATORS = [
 #OAUTH2.0
 SOCIAL_AUTH_FACEBOOK_KEY=os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET=os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
-SOCIAL_AUTH_FACEBOOK_SCOPE = os.environ.get('SOCIAL_AUTH_FACEBOOK_SCOPE')
+# SOCIAL_AUTH_FACEBOOK_SCOPE = os.environ.get('SOCIAL_AUTH_FACEBOOK_SCOPE')
 
 #AUTH BACKENDS
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
-    'social_core.backends.facebook.FacebookOAuth2'
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth'
 ]
 
 # Internationalization
