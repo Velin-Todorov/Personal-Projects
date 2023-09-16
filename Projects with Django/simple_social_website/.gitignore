@@ -1,6 +1,0 @@
-venv/
-*.sqlite3
-.env
-.key
-*.crt
-*.key
