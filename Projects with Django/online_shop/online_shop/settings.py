@@ -39,7 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'shop',
+    'auth_views',
+
+    #3rd-party apps
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+    'cuser',
+    'social_django'
 ]
+
+AUTH_USER_MODEL = 'cuser.CUser'
+
+#Tailwind
+TAILWIND_APP_NAME = 'theme'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +63,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'online_shop.urls'
@@ -56,7 +75,7 @@ ROOT_URLCONF = 'online_shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['theme/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
