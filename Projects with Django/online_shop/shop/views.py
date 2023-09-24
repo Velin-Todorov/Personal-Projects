@@ -34,3 +34,6 @@ def product_detail(request, id, slug):
         'shop/product/detail.html',
         {'product': product}
     )
+
+def home_view(request):
+    return render(request, 'front_page/store_front.html')

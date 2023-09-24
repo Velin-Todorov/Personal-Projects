@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +24,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=u-lon&2_-g$7iv&nbo#b-)xh4gjqf1m(%v_@ox3o*wgy%d!1&'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['myonlineshop.com', 'localhost', '127.0.0.1']
+
+# authentication backends
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+]
+
+# TWITTER API KEYS AND SECRET
+SOCIAL_AUTH_TWITTER_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('SOCIAL_AUTH_TWITTER_SECRET')
 
 
 # Application definition
@@ -46,7 +60,9 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'cuser',
-    'social_django'
+    'social_django',
+    'django_extensions',
+    'widget_tweaks',
 ]
 
 AUTH_USER_MODEL = 'cuser.CUser'

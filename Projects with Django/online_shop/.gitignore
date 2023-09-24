@@ -1,1 +1,4 @@
 venv
+*.crt
+*.key
+*.sqlite
