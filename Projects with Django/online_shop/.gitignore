@@ -1,4 +1,6 @@
 venv
 *.crt
 *.key
-*.sqlite
+.env
+myvenv/
+db.sqlite3
