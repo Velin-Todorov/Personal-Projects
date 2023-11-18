@@ -12,7 +12,7 @@ def product_list(request, category_slug=None):
 
     return render(
         request, 
-        'shop/product/list.html',
+        f'category_pages/{category_slug}.html',
         {
             'category': category,
             'categories': categories,

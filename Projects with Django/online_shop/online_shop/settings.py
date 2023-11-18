@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['myonlineshop.com', 'localhost', '127.0.0.1']
 
 # authentication backends
 AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
 ]
@@ -65,7 +66,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 
-AUTH_USER_MODEL = 'cuser.CUser'
 
 #Tailwind
 TAILWIND_APP_NAME = 'theme'
