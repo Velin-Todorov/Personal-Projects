@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('auth_views.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    path('', include('profil_app.urls'))
 ]

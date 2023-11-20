@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     
     'shop',
     'auth_views',
+    'profil_app',
 
     #3rd-party apps
     'tailwind',
@@ -136,6 +137,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTH USER
+# AUTH_USER_MODEL = 'auth_views.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
